@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>시험마스터</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="시험마스터">
+<meta name="theme-color" content="#0d1117">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{height:100%;background:#0d1117}
+body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;font-size:15px;line-height:1.5;overflow:hidden}
+#app{height:100vh;max-width:480px;margin:0 auto;position:relative;overflow:hidden}
+:root{
+  --bg:#0d1117;--bg2:#161b27;--bg3:#1e2535;--bg4:#252d40;
+  --text:#f0f6fc;--dim:#7d8fa8;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+  --blue:#4f8ef7;--blue-d:rgba(79,142,247,.15);
+  --green:#34d399;--green-d:rgba(52,211,153,.14);
+  --red:#f87171;--red-d:rgba(248,113,113,.14);
+  --amber:#fbbf24;--amber-d:rgba(251,191,36,.14);
+  --purple:#a78bfa;--purple-d:rgba(167,139,250,.14);
+  --r:14px;--r2:10px;--r3:8px;
+}
+.sc{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:#0d1117;display:block;opacity:0;pointer-events:none;transition:opacity .2s}
+.sc.on{opacity:1;pointer-events:auto}
+.nb{position:sticky;top:0;z-index:50;background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:14px 16px}
+.nb-t{font-size:16px;font-weight:700;flex:1}
+.bk{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;-webkit-appearance:none}
+.pc{padding:16px 16px 100px}
+.sec{margin-bottom:20px}
+.st2{font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.9px;margin-bottom:10px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:15px;border-radius:var(--r2);border:none;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.2px;transition:opacity .15s,transform .15s;-webkit-appearance:none}
+.btn:active{transform:scale(.97);opacity:.85}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important}
+.btp{background:var(--blue);color:#fff}
+.btg{background:var(--green);color:#0d1117}
+.btgh{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.btd{background:var(--red-d);color:var(--red);border:1px solid rgba(248,113,113,.3)}
+.btsm{padding:10px 14px;font-size:13px;border-radius:var(--r3);width:auto}
+.bt2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.inp{width:100%;padding:13px 14px;background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--r2);color:var(--text);font-family:inherit;font-size:15px;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.inp:focus{border-color:var(--blue)}
+.lbl{display:block;font-size:12px;font-weight:700;color:var(--dim);margin-bottom:7px}
+.ig{margin-bottom:14px}
+.tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.bdg{padding:2px 8px;border-radius:12px;font-size:11px;font-weight:700;background:var(--bg4);color:var(--dim)}
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:14px;background:var(--bg3);padding:4px;border-radius:10px}
+.tab{flex:1;padding:8px 4px;text-align:center;font-size:12px;font-weight:700;color:var(--dim);border-radius:7px;cursor:pointer;transition:all .15s}
+.tab.on{background:var(--bg);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.4)}
+/* CHIPS */
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.chip{padding:7px 13px;border-radius:20px;border:1.5px solid var(--border);background:var(--bg3);color:var(--dim);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
+.chip.on{border-color:var(--blue);background:var(--blue-d);color:var(--blue)}
+/* SETUP */
+.hero{padding:60px 24px 30px;text-align:center}
+.logo{width:84px;height:84px;border-radius:22px;background:var(--blue);margin:0 auto 22px;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 0 0 8px rgba(79,142,247,.15),0 12px 32px rgba(79,142,247,.4)}
+.hero-t{font-size:30px;font-weight:900;letter-spacing:-.8px;margin-bottom:8px}
+.hero-t b{color:var(--blue)}
+.hero-s{font-size:13px;color:var(--dim);line-height:1.9}
+.fw{padding:0 20px 40px}
+.an{font-size:12px;color:var(--dim);margin-top:7px}
+.an a{color:var(--blue);text-decoration:none}
+/* HOME */
+.hh{padding:22px 16px 8px;display:flex;align-items:center;justify-content:space-between}
+.hg{font-size:12px;color:var(--dim);margin-bottom:3px}
+.ht{font-size:23px;font-weight:900;letter-spacing:-.5px}
+.ht b{color:var(--blue)}
+.ib{width:40px;height:40px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}
+.sts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}
+.sc2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 10px;text-align:center}
+.sn2{font-size:26px;font-weight:900;color:var(--blue);letter-spacing:-1px}
+.sl2{font-size:11px;color:var(--dim);margin-top:2px}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.ac{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px 14px;cursor:pointer;display:flex;flex-direction:column;gap:9px;transition:background .15s}
+.ac:active{background:var(--bg3)}
+.aci{font-size:28px}
+.act{font-size:13px;font-weight:700}
+.acs{font-size:11px;color:var(--dim)}
+.acf{grid-column:span 2;flex-direction:row;align-items:center;gap:14px;background:linear-gradient(135deg,#1a3360,#261662);border-color:rgba(79,142,247,.35)}
+.acf .aci{font-size:32px}
+.acf .act{font-size:15px}
+.acf .acs{font-size:12px}
+.ac-amber{border-color:rgba(251,191,36,.3);background:var(--amber-d)}
+.ac-amber .act,.ac-amber .acs{color:inherit}
+.ac-red{border-color:rgba(248,113,113,.3);background:var(--red-d)}
+.hi2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:background .15s}
+.hi2:active{background:var(--bg3)}
+.hii{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.hin{flex:1;min-width:0}
+.hin-t{font-size:13px;font-weight:700;margin-bottom:2px}
+.hin-s{font-size:12px;color:var(--dim)}
+.his{text-align:right;flex-shrink:0}
+.his-p{font-size:17px;font-weight:900}
+.his-f{font-size:11px;color:var(--dim)}
+.his-d{font-size:10px;color:var(--dim);margin-top:2px}
+.empty{text-align:center;padding:36px 20px}
+.ei2{font-size:44px;margin-bottom:14px}
+.et2{font-size:13px;color:var(--dim);line-height:1.9}
+/* SUBJECTS */
+.sj{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:15px 14px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:background .15s}
+.sj:active{background:var(--bg3)}
+.sjd{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.sji{flex:1}
+.sjn{font-size:15px;font-weight:700;margin-bottom:3px}
+.sjs2{font-size:12px;color:var(--dim)}
+.sjc{font-size:18px;font-weight:900}
+.cls2{display:flex;gap:9px;flex-wrap:wrap;margin-top:8px}
+.cd{width:38px;height:38px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s}
+.cd.on{border-color:#fff;transform:scale(1.1)}
+/* IMPORT */
+.dz{border:2px dashed rgba(79,142,247,.5);border-radius:var(--r);padding:36px 16px;text-align:center;cursor:pointer;background:var(--blue-d);margin-bottom:14px;transition:background .2s}
+.dz.over{background:rgba(79,142,247,.28)}
+.dzi{font-size:44px;margin-bottom:10px}
+.dzt{font-size:15px;font-weight:700;margin-bottom:5px}
+.dzs{font-size:12px;color:var(--dim)}
+.fb2{background:var(--green-d);border:1px solid rgba(52,211,153,.3);border-radius:var(--r2);padding:12px 14px;display:none;margin-bottom:14px}
+.fbn{font-weight:700;color:var(--green);font-size:13px}
+.pbw{background:var(--bg3);border-radius:6px;height:8px;overflow:hidden;margin:10px 0}
+.pb2{height:100%;background:var(--blue);border-radius:6px;transition:width .5s ease;width:0}
+.pcn{font-size:24px;font-weight:900;color:var(--blue);text-align:center;margin:6px 0 2px}
+.pcs{font-size:12px;color:var(--dim);text-align:center}
+.log{background:#05070f;border:1px solid var(--border);border-radius:var(--r2);padding:10px;font-size:11px;color:var(--dim);max-height:150px;overflow-y:auto;font-family:monospace;margin-top:10px;line-height:1.8}
+.lk{color:var(--green)}.le{color:var(--red)}.li{color:var(--blue)}
+/* EXAM SETUP */
+.esinfo{background:var(--amber-d);border:1px solid rgba(251,191,36,.3);border-radius:var(--r2);padding:13px 14px;margin-bottom:16px;font-size:13px;line-height:1.8}
+.st3{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .15s}
+.st3.on{border-color:var(--blue);background:var(--blue-d)}
+.std{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sti{flex:1}
+.stn{font-size:14px;font-weight:700}
+.sts3{font-size:12px;color:var(--dim)}
+.chk{width:22px;height:22px;border-radius:6px;border:2px solid var(--border2);background:var(--bg3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
+.st3.on .chk{background:var(--blue);border-color:var(--blue);color:#fff}
+/* EXAM */
+.eh{position:sticky;top:0;z-index:20;background:rgba(13,17,23,.96);padding:12px 16px;border-bottom:1px solid var(--border)}
+.et{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.etg{font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-d);padding:4px 10px;border-radius:12px}
+.timer{font-size:12px;font-weight:700;color:var(--amber);font-family:monospace;letter-spacing:.5px;background:var(--amber-d);padding:3px 9px;border-radius:10px}
+.en{font-size:12px;color:var(--dim);margin-left:auto}
+.epw{background:var(--bg3);border-radius:4px;height:4px;overflow:hidden}
+.ep{height:100%;background:var(--blue);border-radius:4px;transition:width .4s ease}
+.pips{display:flex;gap:4px;margin-top:8px}
+.pip{height:4px;border-radius:2px;flex:1;opacity:.25;transition:opacity .3s}
+.pip.done{opacity:1}
+.pip.now{opacity:1;animation:pp 1.5s infinite}
+@keyframes pp{0%,100%{opacity:1}50%{opacity:.45}}
+.qcard{margin:16px 16px 0;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 16px}
+.qm{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.qt{font-size:15px;font-weight:500;line-height:1.9}
+.cl2{padding:12px 16px 130px;display:flex;flex-direction:column;gap:9px}
+.cb2{width:100%;text-align:left;padding:14px;background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r2);color:var(--text);font-family:inherit;font-size:13.5px;line-height:1.6;cursor:pointer;display:flex;align-items:flex-start;gap:11px;transition:border-color .15s,background .15s;-webkit-appearance:none}
+.cb2:active:not(:disabled){transform:scale(.985)}
+.cb2.sel{border-color:var(--blue);background:var(--blue-d)}
+.cb2.cor{border-color:var(--green);background:var(--green-d)}
+.cb2.wrg{border-color:var(--red);background:var(--red-d);opacity:.7}
+.cn2{font-weight:700;color:var(--dim);flex-shrink:0;width:22px}
+.cb2.sel .cn2{color:var(--blue)}
+.cb2.cor .cn2{color:var(--green)}
+.cb2.wrg .cn2{color:var(--red)}
+.qbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:14px 16px 20px;background:var(--bg);border-top:1px solid var(--border);z-index:30}
+.exp{margin:0 16px 12px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);border-radius:var(--r2);padding:14px;display:none}
+.exp-t{font-size:11px;font-weight:700;color:#67e8f9;letter-spacing:.8px;margin-bottom:6px}
+.exp-b{font-size:13px;line-height:1.85;color:#e0f2fe}
+.trans{margin:16px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:30px 20px;text-align:center;display:none}
+.tri{font-size:46px;margin-bottom:12px}
+.trt{font-size:19px;font-weight:800;margin-bottom:5px}
+.trs{font-size:13px;color:var(--dim)}
+/* RESULTS */
+.rh{padding:36px 16px 20px;text-align:center}
+.ring{width:130px;height:130px;border-radius:50%;margin:0 auto 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:5px solid var(--blue);background:var(--blue-d)}
+.rbig{font-size:38px;font-weight:900;color:var(--blue);line-height:1;letter-spacing:-2px}
+.rtot{font-size:13px;color:var(--dim)}
+.rmsg{font-size:20px;font-weight:800;margin-bottom:5px}
+.rpct{font-size:14px;color:var(--dim)}
+.src2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px}
+.srch{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.srcd{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.srcn{font-size:14px;font-weight:700;flex:1}
+.srcs{font-size:18px;font-weight:900}
+.mbar{background:var(--bg3);border-radius:4px;height:5px;overflow:hidden}
+.mbarf{height:100%;border-radius:4px;transition:width .8s ease}
+.wi{background:var(--bg3);border-radius:var(--r2);padding:14px;margin-bottom:10px;border-left:3px solid var(--red)}
+.wm{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.wq{font-size:13.5px;line-height:1.75;margin-bottom:9px}
+.wa2{display:flex;gap:12px;font-size:12px;flex-wrap:wrap;margin-bottom:6px}
+.wmy{color:var(--red)}.wok{color:var(--green)}
+.wex{background:rgba(6,182,212,.09);border:1px solid rgba(6,182,212,.18);border-radius:var(--r3);padding:10px;font-size:12px;line-height:1.8;color:#a5f3fc;margin-top:8px}
+/* WRONG BANK */
+.wbank-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px}
+.wbank-q{font-size:13.5px;line-height:1.7;margin-bottom:8px}
+.wbank-ans{display:flex;gap:10px;font-size:12px;flex-wrap:wrap}
+.wbank-bot{position:sticky;bottom:0;padding:13px 16px 20px;background:var(--bg);border-top:1px solid var(--border)}
+/* TOAST */
+#toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--bg3);border:1px solid var(--border2);border-radius:24px;padding:12px 20px;font-size:13px;font-weight:600;box-shadow:0 4px 24px rgba(0,0,0,.7);opacity:0;transition:all .24s;z-index:9999;white-space:nowrap;max-width:90%;text-align:center;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* MODAL */
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;display:none;align-items:flex-end}
+.mov.open{display:flex}
+.modal{background:var(--bg2);border-radius:22px 22px 0 0;width:100%;max-width:480px;margin:0 auto;padding:24px 18px 40px;animation:sup .25s ease}
+@keyframes sup{from{transform:translateY(40px)}to{transform:translateY(0)}}
+.mot{font-size:17px;font-weight:800;margin-bottom:16px}
+/* TIMER BADGE in results */
+.time-badge{display:inline-flex;align-items:center;gap:5px;background:var(--amber-d);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--amber);margin-top:8px}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- SETUP -->
+<div id="sc-setup" class="sc on">
+  <div class="hero">
+    <div class="logo">📚</div>
+    <div class="hero-t">시험<b>마스터</b></div>
+    <p class="hero-s">PDF 교재를 AI로 자동 분석해<br>과목별 체계적 시험 관리</p>
+  </div>
+  <div class="fw">
+    <div class="ig">
+      <label class="lbl">Claude API 키 (Anthropic)</label>
+      <input type="password" id="inp-key" class="inp" placeholder="sk-ant-...">
+      <p class="an">▶ <a href="https://console.anthropic.com/settings/keys" target="_blank">Anthropic Console에서 발급 (신규 $5 크레딧)</a></p>
+    </div>
+    <button class="btn btp" onclick="doSetup()">시작하기 →</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div id="sc-home" class="sc">
+  <div class="hh">
+    <div>
+      <div class="hg">📖 오늘도 열공!</div>
+      <div class="ht">시험<b>마스터</b></div>
+    </div>
+    <div class="ib" onclick="showSettings()">⚙️</div>
+  </div>
+  <div class="pc" style="padding-top:10px">
+    <div class="sts">
+      <div class="sc2"><div class="sn2" id="h-q">0</div><div class="sl2">총 문제</div></div>
+      <div class="sc2"><div class="sn2" id="h-s">0</div><div class="sl2">과목 수</div></div>
+      <div class="sc2"><div class="sn2" id="h-e">0</div><div class="sl2">시험 횟수</div></div>
+    </div>
+    <div class="ag">
+      <div class="ac acf" onclick="goExamSetup()">
+        <div class="aci">🎯</div>
+        <div><div class="act">시험 시작</div><div class="acs">과목별 맞춤 문제 출제</div></div>
+      </div>
+      <div class="ac ac-amber" onclick="goQuickSetup()">
+        <div class="aci">⚡</div>
+        <div class="act">빠른 시험</div>
+        <div class="acs">과목당 5문제</div>
+      </div>
+      <div class="ac" onclick="go('sc-subjects')">
+        <div class="aci">📂</div>
+        <div class="act">과목 관리</div>
+        <div class="acs">과목 추가·PDF 등록</div>
+      </div>
+      <div class="ac" onclick="go('sc-history')">
+        <div class="aci">📊</div>
+        <div class="act">시험 기록</div>
+        <div class="acs">N차시험 기록 복습</div>
+      </div>
+      <div class="ac ac-red" onclick="go('sc-wrong')">
+        <div class="aci">❌</div>
+        <div class="act">틀린 문제</div>
+        <div class="acs">오답 모음·재시험</div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="st2">최근 시험 기록</div>
+      <div id="recent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBJECTS -->
+<div id="sc-subjects" class="sc">
+  <div class="nb">
+    <button class="bk" onclick="go('sc-home')">←</button>
+    <span class="nb-t">과목 관리</span>
+    <button class="btn btp btsm" onclick="openAddModal()">+ 추가</button>
+  </div>
+  <div class="pc"><div id="sj-list"></div></div>
+</div>
+
+<!-- SUBJECT DETAIL -->
+<div id="sc-sj-detail" class="sc">
+  <div class="nb">
+    <button class="bk" onclick="go('sc-subjects')">←</button>
+    <span class="nb-t" id="sd-title">과목 상세</span>
+  </div>
+  <div class="pc">
+    <div class="card" id="sd-card"></div>
+    <div class="sec">
+      <div class="st2">PDF 문제 추출</div>
+      <button class="btn btp" onclick="goImport()">📄 &nbsp;PDF 업로드 및 추출</button>
+    </div>
+    <div class="sec" style="margin-top:12px">
+      <button class="btn btd" onclick="delSubject()">🗑️ &nbsp;이 과목 삭제</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT -->
+<div id="sc-import" class="sc">
+  <div class="nb">
+    <button class="bk" onclick="go('sc-sj-detail')">←</button>
+    <span class="nb-t">PDF 문제 추출</span>
+  </div>
+  <div class="pc">
+    <div class="card" style="background:var(--blue-d);border-color:rgba(79,142,247,.25);margin-bottom:14px;font-size:12px;color:#93c5fd;line-height:1.9">
+      💡 AI가 배치별로 자동 처리합니다.<br>한번 추출하면 <b>DB에 영구 저장</b> — 재추출 불필요!
+    </div>
+    <div class="dz" id="dz" onclick="document.getElementById('fi').click()">
+      <input type="file" id="fi" accept=".pdf" style="display:none" onchange="onFile(event)">
+      <div class="dzi">📄</div>
+      <div class="dzt">PDF 파일 선택</div>
+      <div class="dzs">탭하여 파일 선택</div>
+    </div>
+    <div class="fb2" id="fb2">📎 <span class="fbn" id="fbn"></span> <span style="color:var(--dim);font-size:12px" id="fbsz"></span></div>
+    <div class="card">
+      <div class="st2" style="margin-bottom:10px">설정</div>
+      <div class="ig">
+        <label class="lbl">답지 시작 페이지 (0 = 자동 감지)</label>
+        <input type="number" id="akp" class="inp" value="0" min="0">
+      </div>
+      <div class="ig" style="margin-bottom:0">
+        <label class="lbl">배치당 페이지 수 (기본 12)</label>
+        <input type="number" id="bszinp" class="inp" value="12" min="5" max="25">
+      </div>
+    </div>
+    <button class="btn btp" id="btn-ext" onclick="startExtract()" disabled>🚀 &nbsp;문제 추출 시작</button>
+    <div class="card" id="prog-card" style="display:none;margin-top:14px">
+      <div class="st2" style="margin-bottom:8px">진행 상황</div>
+      <div class="pcn" id="pcn">0개 추출됨</div>
+      <div class="pbw"><div class="pb2" id="pb2"></div></div>
+      <div class="pcs" id="pcs">준비 중...</div>
+      <div class="log" id="logbox"></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXAM SETUP (Regular) -->
+<div id="sc-exam-setup" class="sc">
+  <div class="nb">
+    <button class="bk" onclick="go('sc-home')">←</button>
+    <span class="nb-t">시험 설정</span>
+  </div>
+  <div class="pc">
+    <div class="esinfo">📋 선택 과목당 설정한 문제 수가 출제됩니다.<br><span id="es-prev" style="color:var(--amber)">과목을 선택하세요</span></div>
+    <div class="sec">
+      <div class="st2">과목당 문제 수</div>
+      <input type="number" id="qcount" class="inp" value="40" min="5" max="500" placeholder="예: 40">
+    </div>
+    <div class="sec">
+      <div class="st2">출제 과목 선택</div>
+      <div id="es-list"></div>
+    </div>
+    <button class="btn btg" id="btn-start" onclick="startExam('regular')" disabled>🎯 &nbsp;시험 시작</button>
+  </div>
+</div>
+
+<!-- QUICK SETUP -->
+<div id="sc-quick-setup" class="sc">
+  <div class="nb">
+    <button class="bk" onclick="go('sc-home')">←</button>
+    <span class="nb-t">⚡ 빠른 시험</span>
+  </div>
+  <div class="pc">
+    <div class="card" style="background:var(--amber-d);border-color:rgba(251,191,36,.3);margin-bottom:16px;font-size:13px;line-height:1.8;color:var(--amber)">
+      ⚡ 과목당 <b>5문제</b>씩 빠르게 풀어봐요!
+    </div>
+    <div class="sec">
+      <div class="st2">출제 과목 선택</div>
+      <div id="qs-list"></div>
+    </div>
+    <div class="esinfo"><span id="qs-prev" style="color:var(--amber)">과목을 선택하세요</span></div>
+    <button class="btn btg" id="btn-qstart" onclick="startExam('quick')" disabled>⚡ &nbsp;빠른 시험 시작</button>
+  </div>
+</div>
+
+<!-- EXAM -->
+<div id="sc-exam" class="sc">
+  <div class="eh">
+    <div class="et">
+      <span class="etg" id="ex-tag">1차시험</span>
+      <span id="ex-subj" style="font-size:11px;color:var(--dim)"></span>
+      <span class="timer" id="timer">00:00</span>
+      <span class="en" id="ex-num">1/40</span>
+    </div>
+    <div class="epw"><div class="ep" id="ex-prog"></div></div>
+    <div class="pips" id="pips"></div>
+  </div>
+  <div class="trans" id="trans">
+    <div class="tri" id="tri">📖</div>
+    <div class="trt" id="trt"></div>
+    <div class="trs" id="trs"></div>
+  </div>
+  <div id="exam-area">
+    <div class="qcard">
+      <div class="qm" id="qm"></div>
+      <div class="qt" id="qt"></div>
+    </div>
+    <div class="cl2" id="cl2"></div>
+    <div class="exp" id="exp">
+      <div class="exp-t">💡 해설</div>
+      <div class="exp-b" id="exp-b"></div>
+    </div>
+  </div>
+  <div class="qbar">
+    <button class="btn btp" id="btn-qa" onclick="handleAct()" disabled>정답 확인</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="sc-results" class="sc">
+  <div class="rh">
+    <div class="ring" id="ring">
+      <div class="rbig" id="r-sc">0</div>
+      <div class="rtot" id="r-tot">/ 0</div>
+    </div>
+    <div class="rmsg" id="r-msg"></div>
+    <div class="rpct" id="r-pct"></div>
+    <div class="time-badge" id="r-time">⏱ 00:00</div>
+  </div>
+  <div class="pc" style="padding-top:0">
+    <div class="bt2" style="margin-bottom:16px">
+      <button class="btn btgh" onclick="retryExam()">🔁 다시 풀기</button>
+      <button class="btn btp" onclick="go('sc-home')">🏠 홈으로</button>
+    </div>
+    <div class="sec"><div class="st2">과목별 결과</div><div id="r-subj"></div></div>
+    <div class="sec"><div class="st2">틀린 문제·해설 (<span id="r-wc">0</span>개)</div><div id="r-wl"></div></div>
+  </div>
+</div>
+
+<!-- HISTORY -->
+<div id="sc-history" class="sc">
+  <div class="nb">
+    <button class="bk" onclick="go('sc-home')">←</button>
+    <span class="nb-t">시험 기록</span>
+  </div>
+  <div class="pc">
+    <div class="tabs">
+      <div class="tab on" onclick="setHistTab('all',this)">전체</div>
+      <div class="tab" onclick="setHistTab('regular',this)">일반시험</div>
+      <div class="tab" onclick="setHistTab('quick',this)">빠른시험</div>
+    </div>
+    <div id="hist-list"></div>
+  </div>
+</div>
+
+<!-- HISTORY DETAIL -->
+<div id="sc-hist-detail" class="sc">
+  <div class="nb">
+    <button class="bk" onclick="go('sc-history')">←</button>
+    <span class="nb-t" id="hd-title">시험 상세</span>
+  </div>
+  <div class="pc"><div id="hd-body"></div></div>
+</div>
+
+<!-- WRONG BANK -->
+<div id="sc-wrong" class="sc">
+  <div class="nb">
+    <button class="bk" onclick="go('sc-home')">←</button>
+    <span class="nb-t">❌ 틀린 문제 모음</span>
+  </div>
+  <div class="pc">
+    <div class="sec-t" style="font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.9px;margin-bottom:8px">과목 필터</div>
+    <div class="chips" id="wrong-chips"></div>
+    <div id="wrong-count-info" style="font-size:13px;color:var(--dim);margin-bottom:14px"></div>
+    <div id="wrong-list-body"></div>
+  </div>
+  <div class="wbank-bot">
+    <button class="btn btd" id="btn-wrong-exam" onclick="startWrongExam()">❌ &nbsp;틀린 문제로 시험보기</button>
+  </div>
+</div>
+
+</div><!-- #app -->
+<div id="toast"></div>
+
+<!-- Modal: Add Subject -->
+<div class="mov" id="m-add" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="mot">새 과목 추가</div>
+    <div class="ig">
+      <label class="lbl">과목 이름</label>
+      <input type="text" id="m-name" class="inp" placeholder="예: 재무회계">
+    </div>
+    <div class="ig">
+      <label class="lbl">아이콘 (이모지)</label>
+      <input type="text" id="m-icon" class="inp" placeholder="📊" maxlength="2">
+    </div>
+    <div class="ig" style="margin-bottom:18px">
+      <label class="lbl">색상</label>
+      <div class="cls2" id="m-colors"></div>
+    </div>
+    <button class="btn btp" onclick="addSubject()">✓ &nbsp;과목 추가</button>
+  </div>
+</div>
+
+<script>
+const COLORS=['#4f8ef7','#34d399','#fbbf24','#f87171','#a78bfa','#22d3ee','#fb923c'];
+const NUMS=['①','②','③','④','⑤'];
+const QUICK_N=5;
+
+const A={
+  key:'',color:COLORS[0],curSJ:null,impSJ:null,pdf:null,
+  sessions:[],flat:[],idx:0,answered:false,sel:null,
+  results:[],examName:'',examType:'regular',
+  examStart:0,examDuration:0,timerInt:null,
+  customCount:40
+};
+let eSubjs=new Set();
+let qSubjs=new Set(); // for quick exam
+let histTab='all';
+let wrongFilter=new Set(); // subject ids, empty = all
+
+let DB;
+function initDB(){
+  return new Promise((ok,fail)=>{
+    const r=indexedDB.open('em_v6',1);
+    r.onupgradeneeded=e=>{
+      const d=e.target.result;
+      if(!d.objectStoreNames.contains('subj'))d.createObjectStore('subj',{keyPath:'id',autoIncrement:true});
+      if(!d.objectStoreNames.contains('q')){const s=d.createObjectStore('q',{keyPath:'id',autoIncrement:true});s.createIndex('sj','sj',{unique:false});}
+      if(!d.objectStoreNames.contains('ex'))d.createObjectStore('ex',{keyPath:'id',autoIncrement:true});
+      if(!d.objectStoreNames.contains('ei')){const s=d.createObjectStore('ei',{keyPath:'id',autoIncrement:true});s.createIndex('eid','eid',{unique:false});}
+      if(!d.objectStoreNames.contains('cfg'))d.createObjectStore('cfg',{keyPath:'k'});
+    };
+    r.onsuccess=e=>{DB=e.target.result;ok()};
+    r.onerror=e=>fail(e);
+  });
+}
+const dg=(st,k)=>new Promise(r=>DB.transaction(st).objectStore(st).get(k).onsuccess=e=>r(e.target.result));
+const da=(st)=>new Promise(r=>DB.transaction(st).objectStore(st).getAll().onsuccess=e=>r(e.target.result));
+const di=(st,ix,v)=>new Promise(r=>DB.transaction(st).objectStore(st).index(ix).getAll(v).onsuccess=e=>r(e.target.result));
+const dp=(st,v)=>new Promise((r,f)=>{const t=DB.transaction(st,'readwrite');t.objectStore(st).put(v);t.oncomplete=r;t.onerror=f});
+const dd2=(st,k)=>new Promise((r,f)=>{const t=DB.transaction(st,'readwrite');t.objectStore(st).delete(k);t.oncomplete=r;t.onerror=f});
+const dadd=(st,v)=>new Promise((r,f)=>{const t=DB.transaction(st,'readwrite');const req=t.objectStore(st).add(v);req.onsuccess=e=>r(e.target.result);t.onerror=f});
+const daddm=(st,arr)=>new Promise((r,f)=>{if(!arr.length){r();return}const t=DB.transaction(st,'readwrite');const s=t.objectStore(st);arr.forEach(v=>s.add(v));t.oncomplete=r;t.onerror=f});
+const ddx=(st,ix,v)=>new Promise(r=>{const t=DB.transaction(st,'readwrite');const s=t.objectStore(st);s.index(ix).getAllKeys(v).onsuccess=e=>{e.target.result.forEach(k=>s.delete(k));r()}});
+const gcfg=async k=>{const r=await dg('cfg',k);return r?.v};
+const scfg=(k,v)=>dp('cfg',{k,v});
+
+// ── UI ──────────────────────────────────────────
+function go(id){
+  document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
+  const el=document.getElementById(id);
+  if(el){el.classList.add('on');el.scrollTop=0;}
+  if(id==='sc-home')loadHome();
+  else if(id==='sc-subjects')loadSubjects();
+  else if(id==='sc-history')loadHistory();
+  else if(id==='sc-wrong')loadWrongBank();
+}
+function toast(msg,ms=2600){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),ms);
+}
+function addLog(msg,cls){
+  const b=document.getElementById('logbox');if(!b)return;
+  const d=document.createElement('div');
+  const ts=new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  d.textContent='['+ts+'] '+msg;if(cls)d.className=cls;
+  b.appendChild(d);b.scrollTop=b.scrollHeight;
+}
+const sl=ms=>new Promise(r=>setTimeout(r,ms));
+function shuf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]]}return b}
+function fdate(ts){return new Date(ts).toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})}
+function pc(p){return p>=80?'var(--green)':p>=60?'var(--amber)':'var(--red)'}
+function fmtTime(s){const m=Math.floor(s/60);const ss=s%60;return(m<10?'0':'')+m+':'+(ss<10?'0':'')+ss}
+function openModal(){document.getElementById('m-add').classList.add('open')}
+function closeModal(){document.getElementById('m-add').classList.remove('open')}
+
+function etypeBadge(t){
+  if(t==='quick')return '<span class="tag" style="background:var(--amber-d);color:var(--amber)">⚡빠른시험</span>';
+  if(t==='wrongReview')return '<span class="tag" style="background:var(--red-d);color:var(--red)">❌오답시험</span>';
+  return '<span class="tag" style="background:var(--blue-d);color:var(--blue)">🎯일반시험</span>';
+}
+
+function wiHtml(r,sm){
+  const s=sm&&(sm[r.sj]||sm[r.subjectId]);
+  const col=s?s.color:(r.sc||'#4f8ef7');
+  const sn=s?s.name:(r.sn||'과목');
+  const ca=r.choices&&r.choices.length?r.choices[(typeof r.answer==='number'?r.answer:parseInt(r.answer))-1]||r.answer:r.answer;
+  const uaRaw=r.ua!=null?r.ua:r.userAnswer;
+  const ua=r.choices&&r.choices.length&&typeof uaRaw==='number'?r.choices[uaRaw-1]||uaRaw:uaRaw;
+  return '<div class="wi"><div class="wm"><span class="tag" style="background:'+col+'22;color:'+col+'">'+sn+'</span><span class="bdg">'+(r.unit||'')+'</span></div><div class="wq">'+r.question+'</div><div class="wa2"><span class="wmy">✗ 내 답: '+(ua!=null?ua:'(없음)')+'</span><span style="color:var(--dim)">│</span><span class="wok">✓ 정답: '+ca+'</span></div>'+(r.explanation?'<div class="wex">💡 해설<br>'+r.explanation+'</div>':'')+'</div>';
+}
+
+// ── TIMER ────────────────────────────────────────
+function startTimer(){
+  A.examStart=Date.now();A.examDuration=0;
+  clearInterval(A.timerInt);
+  A.timerInt=setInterval(function(){
+    const sec=Math.floor((Date.now()-A.examStart)/1000);
+    const el=document.getElementById('timer');if(el)el.textContent=fmtTime(sec);
+  },1000);
+}
+function stopTimer(){
+  clearInterval(A.timerInt);A.timerInt=null;
+  A.examDuration=Math.floor((Date.now()-A.examStart)/1000);
+}
+
+// ── SETUP ────────────────────────────────────────
+async function doSetup(){
+  const k=document.getElementById('inp-key').value.trim();
+  if(!k||!k.startsWith('sk-ant-')){toast('⚠️ Claude API 키는 sk-ant- 로 시작해야 합니다');return}
+  A.key=k;await scfg('key',k);toast('✅ 저장됨');go('sc-home');
+}
+function showSettings(){
+  const k=prompt('Claude API 키 재입력:',A.key)||'';
+  if(k.startsWith('sk-ant-')){A.key=k;scfg('key',k);toast('✅ 업데이트됨')}else{toast('⚠️ Claude API 키는 sk-ant- 로 시작해야 합니다')}
+}
+
+// ── HOME ─────────────────────────────────────────
+async function loadHome(){
+  const [sjs,qs,exs]=await Promise.all([da('subj'),da('q'),da('ex')]);
+  document.getElementById('h-q').textContent=qs.length.toLocaleString();
+  document.getElementById('h-s').textContent=sjs.length;
+  document.getElementById('h-e').textContent=exs.length;
+  const sm=Object.fromEntries(sjs.map(s=>[s.id,s]));
+  const el=document.getElementById('recent');
+  if(!exs.length){el.innerHTML='<div class="empty"><div class="ei2">📋</div><div class="et2">아직 시험 기록이 없어요.</div></div>';return}
+  const sorted=[...exs].sort((a,b)=>b.date-a.date).slice(0,5);
+  el.innerHTML=sorted.map(e=>{
+    const p=Math.round(e.score/e.total*100);
+    const sn=(e.sjs||[]).map(id=>sm[id]?sm[id].name:'?').join(', ');
+    const col=(e.sjs||[]).map(id=>sm[id]?sm[id].color:'#4f8ef7')[0]||'#4f8ef7';
+    const dur=e.duration?'⏱'+fmtTime(e.duration):'';
+    return '<div class="hi2" onclick="viewExam('+e.id+')"><div class="hii" style="background:'+col+'22">📝</div><div class="hin"><div class="hin-t">'+e.name+'</div><div class="hin-s">'+sn+'</div><div style="font-size:11px;color:#4a5568;margin-top:2px">'+fdate(e.date)+(dur?' · '+dur:'')+'</div></div><div class="his"><div class="his-p" style="color:'+pc(p)+'">'+p+'%</div><div class="his-f">'+e.score+'/'+e.total+'</div></div></div>';
+  }).join('');
+}
+async function goExamSetup(){
+  const qs=await da('q');
+  if(!qs.length){toast('⚠️ 먼저 과목을 추가하고 PDF를 추출하세요');return}
+  go('sc-exam-setup');loadExamSetup();
+}
+async function goQuickSetup(){
+  const qs=await da('q');
+  if(!qs.length){toast('⚠️ 먼저 과목을 추가하고 PDF를 추출하세요');return}
+  go('sc-quick-setup');loadQuickSetup();
+}
+
+// ── SUBJECTS ─────────────────────────────────────
+async function loadSubjects(){
+  const [sjs,qs]=await Promise.all([da('subj'),da('q')]);
+  const cnt={};sjs.forEach(s=>cnt[s.id]=0);qs.forEach(q=>{if(cnt[q.sj]!==undefined)cnt[q.sj]++});
+  const el=document.getElementById('sj-list');
+  if(!sjs.length){el.innerHTML='<div class="empty"><div class="ei2">📂</div><div class="et2">과목이 없어요.<br>+ 추가 버튼으로 시작하세요.</div></div>';return}
+  el.innerHTML=sjs.map(s=>'<div class="sj" onclick="openDetail('+s.id+')"><div class="sjd" style="background:'+s.color+'22;color:'+s.color+'">'+s.icon+'</div><div class="sji"><div class="sjn">'+s.name+'</div><div class="sjs2">'+(cnt[s.id]||0)+'문제 · '+(cnt[s.id]>=5?'✅ 출제 가능':'⚠️ 문제 필요')+'</div></div><div class="sjc" style="color:'+s.color+'">'+(cnt[s.id]||0)+'</div></div>').join('');
+}
+function openAddModal(){
+  document.getElementById('m-name').value='';document.getElementById('m-icon').value='';A.color=COLORS[0];
+  document.getElementById('m-colors').innerHTML=COLORS.map((c,i)=>'<div class="cd'+(i===0?' on':'')+'" style="background:'+c+'" onclick="pickColor(this,\''+c+'\')"></div>').join('');
+  openModal();
+}
+function pickColor(el,c){A.color=c;document.querySelectorAll('.cd').forEach(d=>d.classList.remove('on'));el.classList.add('on')}
+async function addSubject(){
+  const name=document.getElementById('m-name').value.trim();
+  const icon=document.getElementById('m-icon').value.trim()||'📖';
+  if(!name){toast('⚠️ 과목 이름 입력');return}
+  const ex=await da('subj');
+  if(ex.find(s=>s.name===name)){toast('⚠️ 이미 같은 이름 존재');return}
+  await dadd('subj',{name,icon,color:A.color,ts:Date.now()});
+  closeModal();toast('✅ "'+name+'" 추가됨');loadSubjects();
+}
+async function openDetail(id){
+  A.curSJ=id;
+  const [s,qs,exs]=await Promise.all([dg('subj',id),di('q','sj',id),da('ex')]);
+  document.getElementById('sd-title').textContent=s.name;
+  const mine=exs.filter(e=>e.sjs&&e.sjs.includes(id));
+  document.getElementById('sd-card').innerHTML='<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:46px;height:46px;border-radius:13px;background:'+s.color+'22;color:'+s.color+';display:flex;align-items:center;justify-content:center;font-size:22px">'+s.icon+'</div><div><div style="font-size:17px;font-weight:800">'+s.name+'</div></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center"><div><div style="font-size:22px;font-weight:900;color:var(--blue)">'+qs.length+'</div><div style="font-size:11px;color:var(--dim)">저장 문제</div></div><div><div style="font-size:22px;font-weight:900;color:var(--amber)">'+mine.length+'</div><div style="font-size:11px;color:var(--dim)">시험 횟수</div></div><div style="color:'+(qs.length>=5?'var(--green)':'var(--red)')+'"><div style="font-size:22px;font-weight:900">'+(qs.length>=5?'OK':'부족')+'</div><div style="font-size:11px;color:var(--dim)">출제 가능</div></div></div>';
+  go('sc-sj-detail');
+}
+async function delSubject(){
+  if(!confirm('이 과목과 관련 문제를 모두 삭제할까요?'))return;
+  await dd2('subj',A.curSJ);await ddx('q','sj',A.curSJ);
+  toast('🗑️ 삭제됨');go('sc-subjects');
+}
+function goImport(){A.impSJ=A.curSJ;go('sc-import');resetImport()}
+
+// ── IMPORT ───────────────────────────────────────
+function resetImport(){
+  A.pdf=null;document.getElementById('fi').value='';
+  document.getElementById('fb2').style.display='none';
+  document.getElementById('btn-ext').disabled=true;
+  document.getElementById('prog-card').style.display='none';
+  const lb=document.getElementById('logbox');if(lb)lb.innerHTML='';
+  const pb=document.getElementById('pb2');if(pb)pb.style.width='0';
+  const pn=document.getElementById('pcn');if(pn)pn.textContent='0개 추출됨';
+}
+function onFile(e){
+  const f=e.target.files[0];if(!f)return;
+  A.pdf=f;
+  document.getElementById('fb2').style.display='block';
+  document.getElementById('fbn').textContent=f.name;
+  document.getElementById('fbsz').textContent='('+(f.size/1048576).toFixed(1)+' MB)';
+  document.getElementById('btn-ext').disabled=false;
+}
+async function loadPdfJs(){
+  if(window['pdfjs-dist/build/pdf'])return window['pdfjs-dist/build/pdf'];
+  return new Promise((ok,fail)=>{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    s.onload=()=>ok(window['pdfjs-dist/build/pdf']);
+    s.onerror=()=>fail(new Error('PDF.js 로드 실패'));
+    document.head.appendChild(s);
+  });
+}
+async function getPages(file){
+  const lib=await loadPdfJs();
+  lib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const buf=await file.arrayBuffer();
+  const pdf=await lib.getDocument({data:buf}).promise;
+  const n=pdf.numPages;
+  addLog('PDF 로드: '+n+'페이지','li');
+  const pages=[];
+  for(let i=1;i<=n;i++){
+    const p=await pdf.getPage(i);
+    const c=await p.getTextContent();
+    pages.push({pg:i,text:c.items.map(x=>x.str).join(' ')});
+    if(i%25===0||i===n)document.getElementById('pcs').textContent='텍스트 추출: '+i+'/'+n;
+  }
+  return pages;
+}
+function autoAK(pages){
+  const kw=['정답','해설','Answer','정답 및 해설'];
+  const half=Math.floor(pages.length*.55);
+  for(let i=half;i<pages.length;i++)
+    if(kw.some(k=>pages[i].text.includes(k))&&pages[i].text.length<800)return pages[i].pg;
+  return Math.floor(pages.length*.75)+1;
+}
+async function startExtract(){
+  if(!A.pdf||!A.key)return;
+  const sj=await dg('subj',A.impSJ);
+  document.getElementById('prog-card').style.display='block';
+  document.getElementById('logbox').innerHTML='';
+  document.getElementById('btn-ext').disabled=true;
+  let akp=parseInt(document.getElementById('akp').value)||0;
+  const bsz=parseInt(document.getElementById('bszinp').value)||12;
+  let total=0;
+  try{
+    const pages=await getPages(A.pdf);
+    if(!akp){akp=autoAK(pages);addLog('답지 자동 감지: '+akp+'p','li')}
+    else addLog('답지 시작: '+akp+'p','li');
+    const qp=pages.filter(p=>p.pg<akp);
+    const akt=pages.filter(p=>p.pg>=akp).map(p=>'['+p.pg+'p]\n'+p.text).join('\n').substring(0,9000);
+    addLog('문제 '+qp.length+'p / 답지 '+(pages.length-qp.length)+'p','li');
+    const batches=[];
+    for(let i=0;i<qp.length;i+=bsz)batches.push(qp.slice(i,i+bsz));
+    addLog(batches.length+'배치 처리 시작','li');
+    for(let bi=0;bi<batches.length;bi++){
+      const bt=batches[bi];
+      const sp=bt[0].pg,ep=bt[bt.length-1].pg;
+      addLog('배치 '+(bi+1)+'/'+batches.length+' ('+sp+'~'+ep+'p)...');
+      document.getElementById('pb2').style.width=Math.round(bi/batches.length*100)+'%';
+      document.getElementById('pcs').textContent='배치 '+(bi+1)+'/'+batches.length;
+      let ok=false,tr=0;
+      while(!ok&&tr<3){
+        try{
+          const qs=await callAI(bt.map(p=>'['+p.pg+'p]\n'+p.text).join('\n'),akt,sj.name);
+          const save=qs.map(q=>Object.assign({},q,{sj:A.impSJ}));
+          if(save.length){await daddm('q',save);total+=save.length;document.getElementById('pcn').textContent=total+'개 추출됨';}
+          addLog('배치 '+(bi+1)+' 완료: '+save.length+'개','lk');ok=true;
+        }catch(e){tr++;addLog('오류('+tr+'/3): '+e.message,'le');if(tr<3)await sl(2500);}
+      }
+      await sl(600);
+    }
+    document.getElementById('pb2').style.width='100%';
+    document.getElementById('pcs').textContent='✅ 완료!';
+    addLog('🎉 총 '+total+'개 추출 완료!','lk');
+    toast('✅ '+total+'개 문제 저장됨');
+    setTimeout(()=>openDetail(A.impSJ),1500);
+  }catch(e){addLog('오류: '+e.message,'le');toast('❌ 추출 오류');console.error(e);}
+  finally{document.getElementById('btn-ext').disabled=false;}
+}
+async function callAI(btext,aktext,sname){
+  const prompt='한국 교재에서 시험 문제를 추출하는 전문가입니다.\n과목: '+sname+'\n\n=== 문제 텍스트 ===\n'+btext.substring(0,11000)+'\n\n=== 정답/해설 텍스트 ===\n'+aktext+'\n\n모든 시험 문제를 추출하고 정답/해설을 연결하세요.\n순수 JSON 배열만 반환(코드블록 없이):\n[{"unit":"단원명","type":"연습문제","question":"문제내용","choices":["① ...","② ...","③ ...","④ ...","⑤ ..."],"answer":1,"explanation":"해설"}]\nanswer는 1~5 정수(주관식은 정답텍스트), choices 없으면 [], 문제없으면 []';
+  const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':A.key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:8192,messages:[{role:'user',content:prompt}]})});
+  if(!res.ok){const e=await res.json();throw new Error(e.error?e.error.message:'HTTP '+res.status)}
+  const d=await res.json();
+  const raw=((d.content||[])[0]||{text:''}).text.trim();
+  const clean=raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/```\s*$/,'').trim();
+  let arr;
+  try{arr=JSON.parse(clean)}catch(_){const m=clean.match(/\[[\s\S]*\]/);arr=m?JSON.parse(m[0]):[]}
+  return(arr||[]).filter(q=>q&&q.question&&q.question.length>4).map(q=>({unit:(q.unit||'기타').trim(),type:(q.type||'연습문제').trim(),question:(q.question||'').trim(),choices:Array.isArray(q.choices)?q.choices:[],answer:q.answer!=null?q.answer:null,explanation:(q.explanation||'').trim()}));
+}
+
+// ── EXAM SETUP (Regular) ──────────────────────────
+async function loadExamSetup(){
+  eSubjs.clear();
+  const [sjs,qs]=await Promise.all([da('subj'),da('q')]);
+  const cnt={};sjs.forEach(s=>cnt[s.id]=0);qs.forEach(q=>{if(cnt[q.sj]!==undefined)cnt[q.sj]++});
+  const el=document.getElementById('es-list');
+  const ok2=sjs.filter(s=>cnt[s.id]>=5);
+  const short=sjs.filter(s=>cnt[s.id]>0&&cnt[s.id]<5);
+  if(!ok2.length){el.innerHTML='<div class="empty"><div class="ei2">📋</div><div class="et2">각 과목당 5개 이상 문제가 필요합니다.</div></div>';document.getElementById('btn-start').disabled=true;return;}
+  el.innerHTML=ok2.map(s=>'<div class="st3" id="st3-'+s.id+'" onclick="togSubj('+s.id+',this,\'es\')"><div class="std" style="background:'+s.color+'22;color:'+s.color+'">'+s.icon+'</div><div class="sti"><div class="stn">'+s.name+'</div><div class="sts3">'+cnt[s.id]+'문제 보유</div></div><div class="chk" id="chk-'+s.id+'"></div></div>').join('')+(short.length?'<div style="font-size:12px;color:var(--dim);margin-top:8px">⚠️ 문제 부족: '+short.map(s=>s.name).join(', ')+'</div>':'');
+  upPrev();
+}
+function togSubj(id,el,mode){
+  const set=mode==='qs'?qSubjs:eSubjs;
+  const pfx=mode==='qs'?'qchk-':'chk-';
+  if(set.has(id)){set.delete(id);el.classList.remove('on');document.getElementById(pfx+id).textContent=''}
+  else{set.add(id);el.classList.add('on');document.getElementById(pfx+id).textContent='✓'}
+  if(mode==='qs')upQPrev();else upPrev();
+}
+function upPrev(){
+  const n=eSubjs.size;
+  const cnt=parseInt(document.getElementById('qcount').value)||40;
+  document.getElementById('es-prev').textContent=n?n+'과목 선택 → 총 '+(n*cnt)+'문제':'과목을 선택하세요';
+  document.getElementById('btn-start').disabled=!n;
+}
+
+// ── QUICK SETUP ───────────────────────────────────
+async function loadQuickSetup(){
+  qSubjs.clear();
+  const [sjs,qs]=await Promise.all([da('subj'),da('q')]);
+  const cnt={};sjs.forEach(s=>cnt[s.id]=0);qs.forEach(q=>{if(cnt[q.sj]!==undefined)cnt[q.sj]++});
+  const el=document.getElementById('qs-list');
+  const ok2=sjs.filter(s=>cnt[s.id]>=QUICK_N);
+  if(!ok2.length){el.innerHTML='<div class="empty"><div class="ei2">⚡</div><div class="et2">문제가 없습니다.</div></div>';document.getElementById('btn-qstart').disabled=true;return;}
+  el.innerHTML=ok2.map(s=>'<div class="st3" id="qst3-'+s.id+'" onclick="togSubj('+s.id+',this,\'qs\')"><div class="std" style="background:'+s.color+'22;color:'+s.color+'">'+s.icon+'</div><div class="sti"><div class="stn">'+s.name+'</div><div class="sts3">'+cnt[s.id]+'문제 · 5문제 출제</div></div><div class="chk" id="qchk-'+s.id+'"></div></div>').join('');
+  upQPrev();
+}
+function upQPrev(){
+  const n=qSubjs.size;
+  document.getElementById('qs-prev').textContent=n?n+'과목 선택 → 총 '+(n*QUICK_N)+'문제':'과목을 선택하세요';
+  document.getElementById('btn-qstart').disabled=!n;
+}
+
+// ── EXAM ──────────────────────────────────────────
+async function startExam(type){
+  const isQuick=type==='quick';
+  const selSet=isQuick?qSubjs:eSubjs;
+  if(!selSet.size)return;
+  const qn=isQuick?QUICK_N:(parseInt(document.getElementById('qcount').value)||40);
+  const [sjs,qs,exs]=await Promise.all([da('subj'),da('q'),da('ex')]);
+  const n=exs.length+1;
+  A.examName=isQuick?'빠른시험'+(n)+'회':n+'차시험';
+  A.examType=isQuick?'quick':'regular';
+  A.sessions=[];A.flat=[];A.results=[];
+  for(const sid of selSet){
+    const s=sjs.find(x=>x.id===sid);
+    const pool=shuf(qs.filter(q=>q.sj===sid)).slice(0,qn);
+    A.sessions.push({sid,sn:s.name,sc:s.color,si:s.icon,qs:pool});
+    A.flat.push(...pool.map(q=>Object.assign({},q,{_sn:s.name,_sc:s.color,_si:s.icon})));
+  }
+  A.idx=0;A.answered=false;A.sel=null;
+  go('sc-exam');buildPips();startTimer();renderQ();
+}
+
+async function startWrongExam(){
+  const allEi=await da('ei');
+  const sjs=await da('subj');
+  const sm=Object.fromEntries(sjs.map(s=>[s.id,s]));
+  let wrongs=allEi.filter(i=>!i.correct);
+  // filter by selected subjects
+  if(wrongFilter.size>0) wrongs=wrongs.filter(i=>wrongFilter.has(i.sj));
+  // deduplicate by question text
+  const seen=new Set();
+  const unique=wrongs.filter(i=>{if(seen.has(i.question))return false;seen.add(i.question);return true;});
+  if(!unique.length){toast('⚠️ 선택 과목에 틀린 문제가 없습니다');return}
+  const [exs]=await Promise.all([da('ex')]);
+  const n=exs.length+1;
+  A.examName='오답시험'+n+'회';
+  A.examType='wrongReview';
+  A.sessions=[];A.flat=[];A.results=[];
+  // group by sj for sessions
+  const sjSet=[...new Set(unique.map(i=>i.sj))];
+  for(const sid of sjSet){
+    const s=sm[sid];if(!s)continue;
+    const pool=unique.filter(i=>i.sj===sid);
+    A.sessions.push({sid,sn:s.name,sc:s.color,si:s.icon,qs:pool});
+    A.flat.push(...pool.map(q=>Object.assign({},q,{_sn:s.name,_sc:s.color,_si:s.icon,sj:sid})));
+  }
+  if(!A.flat.length){toast('⚠️ 출제할 문제가 없습니다');return}
+  A.idx=0;A.answered=false;A.sel=null;
+  go('sc-exam');buildPips();startTimer();renderQ();
+}
+
+function buildPips(){
+  document.getElementById('pips').innerHTML=A.sessions.map((s,i)=>'<div class="pip'+(i===0?' now':'')+'" id="pip-'+i+'" style="background:'+s.sc+'"></div>').join('');
+}
+function upPips(){
+  const perSubj=A.sessions.length>0?Math.ceil(A.flat.length/A.sessions.length):1;
+  const done=Math.floor(A.idx/perSubj);
+  A.sessions.forEach((_,i)=>{const p=document.getElementById('pip-'+i);if(!p)return;p.className='pip'+(i<done?' done':i===done?' now':'');});
+}
+function renderQ(){
+  if(A.idx>=A.flat.length){showResults();return}
+  doRenderQ();upPips();
+}
+function doRenderQ(){
+  const q=A.flat[A.idx];const total=A.flat.length;
+  A.sel=null;A.answered=false;
+  document.getElementById('exp').style.display='none';
+  document.getElementById('ex-tag').textContent=A.examName;
+  document.getElementById('ex-subj').textContent=q._sn;
+  document.getElementById('ex-num').textContent=(A.idx+1)+'/'+total;
+  document.getElementById('ex-prog').style.width=(A.idx/total*100)+'%';
+  document.getElementById('qm').innerHTML='<span class="tag" style="background:'+q._sc+'22;color:'+q._sc+'">'+q._sn+'</span><span class="bdg">'+(q.unit||'')+'</span>';
+  document.getElementById('qt').textContent=q.question;
+  const cl=document.getElementById('cl2');cl.innerHTML='';
+  const btn=document.getElementById('btn-qa');
+  btn.onclick=handleAct;
+  if(q.choices&&q.choices.length){
+    q.choices.forEach(function(c,i){
+      const b=document.createElement('button');
+      b.className='cb2';b.dataset.i=i+1;
+      b.innerHTML='<span class="cn2">'+(NUMS[i]||i+1)+'</span><span>'+c.replace(/^[①②③④⑤]\s*/,'')+'</span>';
+      b.onclick=function(){document.querySelectorAll('.cb2').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');A.sel=i+1;btn.disabled=false;};
+      cl.appendChild(b);
+    });
+    btn.textContent='정답 확인';btn.className='btn btp';btn.disabled=true;
+  }else{
+    const inp=document.createElement('input');inp.type='text';inp.className='inp';inp.id='sinp';inp.placeholder='정답 입력';cl.appendChild(inp);
+    btn.textContent='정답 확인';btn.className='btn btp';btn.disabled=false;
+  }
+}
+async function handleAct(){
+  if(!A.answered){
+    const q=A.flat[A.idx];let ua;
+    if(q.choices&&q.choices.length){if(A.sel===null)return;ua=A.sel}
+    else{ua=(document.getElementById('sinp')?document.getElementById('sinp').value:'').trim()}
+    const cor=typeof q.answer==='number'?parseInt(ua)===q.answer:String(ua).trim().toLowerCase()===String(q.answer).trim().toLowerCase();
+    A.answered=true;
+    A.results.push({qid:q.id,sj:q.sj,sn:q._sn,sc:q._sc,ua:ua,correct:cor,question:q.question,choices:q.choices,answer:q.answer,explanation:q.explanation,unit:q.unit,type:q.type});
+    if(q.choices&&q.choices.length){
+      document.querySelectorAll('.cb2').forEach(function(b){
+        const bi=parseInt(b.dataset.i);const ca=typeof q.answer==='number'?q.answer:parseInt(q.answer);
+        if(bi===ca){b.classList.remove('sel');b.classList.add('cor')}
+        else if(bi===ua&&!cor){b.classList.remove('sel');b.classList.add('wrg')}
+        b.disabled=true;
+      });
+    }
+    if(q.explanation){document.getElementById('exp-b').textContent=q.explanation;document.getElementById('exp').style.display='block'}
+    const btn=document.getElementById('btn-qa');
+    const last=A.idx>=A.flat.length-1;
+    btn.textContent=last?'결과 보기 🏆':'다음 문제 →';
+    btn.className=cor?'btn btg':'btn btgh';btn.disabled=false;
+  }else{A.idx++;renderQ();}
+}
+
+// ── RESULTS ───────────────────────────────────────
+async function showResults(){
+  stopTimer();
+  const score=A.results.filter(r=>r.correct).length;
+  const total=A.results.length;
+  const pct=total?Math.round(score/total*100):0;
+  const eid=await dadd('ex',{name:A.examName,date:Date.now(),sjs:[...new Set(A.results.map(r=>r.sj))],score,total,pct,examType:A.examType,duration:A.examDuration});
+  await daddm('ei',A.results.map(r=>({eid,sj:r.sj,ua:r.ua,correct:r.correct,question:r.question,choices:r.choices,answer:r.answer,explanation:r.explanation,unit:r.unit,type:r.type,sn:r.sn,sc:r.sc})));
+  const ring=document.getElementById('ring');ring.style.borderColor=pc(pct);
+  document.getElementById('r-sc').textContent=score;document.getElementById('r-sc').style.color=pc(pct);
+  document.getElementById('r-tot').textContent='/ '+total;
+  document.getElementById('r-msg').textContent=pct>=90?'🏆 완벽해요!':pct>=80?'🎉 훌륭해요!':pct>=70?'👍 잘했어요!':pct>=60?'📚 합격권!':'💪 다시 도전!';
+  document.getElementById('r-pct').textContent=A.examName+' · 정확도 '+pct+'%';
+  document.getElementById('r-time').textContent='⏱ '+fmtTime(A.examDuration);
+  document.getElementById('r-subj').innerHTML=A.sessions.map(function(s){
+    const its=A.results.filter(r=>r.sj===s.sid);const sc2=its.filter(r=>r.correct).length;const sp=Math.round(sc2/its.length*100);
+    return '<div class="src2"><div class="srch"><div class="srcd" style="background:'+s.sc+'22;color:'+s.sc+'">'+s.si+'</div><div class="srcn">'+s.sn+'</div><div class="srcs" style="color:'+pc(sp)+'">'+sc2+'/'+its.length+'</div></div><div class="mbar"><div class="mbarf" style="width:'+sp+'%;background:'+pc(sp)+'"></div></div></div>';
+  }).join('');
+  const wrongs=A.results.filter(r=>!r.correct);
+  document.getElementById('r-wc').textContent=wrongs.length;
+  document.getElementById('r-wl').innerHTML=wrongs.length?wrongs.map(r=>wiHtml(r,{})).join(''):'<p style="text-align:center;color:var(--green);padding:20px 0">🎉 모두 정답!</p>';
+  go('sc-results');
+}
+function retryExam(){A.idx=0;A.answered=false;A.sel=null;A.results=[];A.flat=shuf(A.flat);go('sc-exam');buildPips();startTimer();renderQ();}
+
+// ── HISTORY ───────────────────────────────────────
+async function loadHistory(){
+  const [exs,sjs]=await Promise.all([da('ex'),da('subj')]);
+  const sm=Object.fromEntries(sjs.map(s=>[s.id,s]));
+  const el=document.getElementById('hist-list');
+  let filtered=exs;
+  if(histTab==='regular')filtered=exs.filter(e=>!e.examType||e.examType==='regular');
+  else if(histTab==='quick')filtered=exs.filter(e=>e.examType==='quick');
+  if(!filtered.length){el.innerHTML='<div class="empty"><div class="ei2">📊</div><div class="et2">시험 기록이 없어요.</div></div>';return}
+  el.innerHTML=[...filtered].sort((a,b)=>b.date-a.date).map(function(e){
+    const p=Math.round(e.score/e.total*100);
+    const sn=(e.sjs||[]).map(id=>sm[id]?sm[id].name:'?').join(', ');
+    const col=(e.sjs||[]).map(id=>sm[id]?sm[id].color:'#4f8ef7')[0]||'#4f8ef7';
+    const dur=e.duration?'⏱ '+fmtTime(e.duration):'';
+    return '<div class="hi2" onclick="viewExam('+e.id+')"><div class="hii" style="background:'+col+'22">'+typeIcon(e.examType)+'</div><div class="hin"><div class="hin-t">'+e.name+'</div><div class="hin-s">'+sn+'</div><div style="font-size:11px;color:#4a5568;margin-top:2px">'+fdate(e.date)+(dur?' · '+dur:'')+'</div></div><div class="his"><div class="his-p" style="color:'+pc(p)+'">'+p+'%</div><div class="his-f">'+e.score+'/'+e.total+'</div></div></div>';
+  }).join('');
+}
+function typeIcon(t){return t==='quick'?'⚡':t==='wrongReview'?'❌':'📝'}
+function setHistTab(tab,el){
+  histTab=tab;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  loadHistory();
+}
+
+async function viewExam(id){
+  const [ex,items,sjs]=await Promise.all([dg('ex',id),di('ei','eid',id),da('subj')]);
+  const sm=Object.fromEntries(sjs.map(s=>[s.id,s]));
+  const p=Math.round(ex.score/ex.total*100);
+  document.getElementById('hd-title').textContent=ex.name;
+  const sjids=[...new Set(items.map(i=>i.sj))];
+  const breakdown=sjids.map(function(sid){
+    const its=items.filter(i=>i.sj===sid);const sc=its.filter(i=>i.correct).length;
+    const s=sm[sid];const sp=Math.round(sc/its.length*100);
+    return '<div class="src2"><div class="srch"><div class="srcd" style="background:'+(s?s.color:'#4f8ef7')+'22;color:'+(s?s.color:'#4f8ef7')+'">'+(s?s.icon:'📖')+'</div><div class="srcn">'+(s?s.name:'과목')+'</div><div class="srcs" style="color:'+pc(sp)+'">'+sc+'/'+its.length+'</div></div><div class="mbar"><div class="mbarf" style="width:'+sp+'%;background:'+pc(sp)+'"></div></div></div>';
+  }).join('');
+  const wrongs=items.filter(i=>!i.correct);
+  const dur=ex.duration?'<div class="time-badge">⏱ 소요시간: '+fmtTime(ex.duration)+'</div>':'';
+  document.getElementById('hd-body').innerHTML='<div class="card" style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="font-size:42px;font-weight:900;color:'+pc(p)+';letter-spacing:-2px">'+ex.score+'</div><div style="font-size:22px;color:var(--dim)">/</div><div style="font-size:22px;font-weight:700;color:var(--dim)">'+ex.total+'</div><div style="flex:1;padding-left:8px"><div style="font-size:12px;color:var(--dim);margin-bottom:2px">'+fdate(ex.date)+'</div><div style="font-size:26px;font-weight:900;color:'+pc(p)+'">'+p+'%</div>'+dur+'</div></div>'+etypeBadge(ex.examType)+'<div class="sec" style="margin-top:14px"><div class="st2">과목별 결과</div>'+breakdown+'</div><div class="sec"><div class="st2">틀린 문제·해설 ('+wrongs.length+'개)</div>'+(wrongs.length?wrongs.map(r=>wiHtml(Object.assign({},r,{_sn:r.sn,_sc:r.sc,ua:r.ua}),sm)).join(''):'<p style="text-align:center;color:var(--green);padding:20px 0">🎉 모두 정답!</p>')+'</div><button class="btn btd" onclick="delExam('+id+')" style="margin-top:8px">🗑️ 이 기록 삭제</button>';
+  go('sc-hist-detail');
+}
+async function delExam(id){
+  if(!confirm('이 시험 기록을 삭제할까요?'))return;
+  await dd2('ex',id);await ddx('ei','eid',id);
+  toast('🗑️ 삭제됨');go('sc-history');
+}
+
+// ── WRONG BANK ────────────────────────────────────
+async function loadWrongBank(){
+  const [allEi,sjs]=await Promise.all([da('ei'),da('subj')]);
+  const sm=Object.fromEntries(sjs.map(s=>[s.id,s]));
+  const allWrongs=allEi.filter(i=>!i.correct);
+  // Build subject chips
+  const sjsWithWrong=[...new Set(allWrongs.map(i=>i.sj))].map(id=>sm[id]).filter(Boolean);
+  const cc=document.getElementById('wrong-chips');
+  cc.innerHTML='<button class="chip'+(wrongFilter.size===0?' on':'')+'" onclick="toggleWrongFilter(null,this)">전체</button>'+sjsWithWrong.map(s=>'<button class="chip'+(wrongFilter.has(s.id)?' on':'')+'" id="wf-'+s.id+'" onclick="toggleWrongFilter('+s.id+',this)" style="'+(wrongFilter.has(s.id)?'border-color:'+s.color+';background:'+s.color+'22;color:'+s.color:'')+'">'+s.icon+' '+s.name+'</button>').join('');
+  renderWrongList(allWrongs,sm);
+}
+function toggleWrongFilter(id,el){
+  if(id===null){wrongFilter.clear();document.querySelectorAll('#wrong-chips .chip').forEach(c=>{c.classList.remove('on');c.style.borderColor='';c.style.background='';c.style.color=''});el.classList.add('on')}
+  else{
+    document.querySelector('#wrong-chips .chip').classList.remove('on');
+    if(wrongFilter.has(id)){wrongFilter.delete(id);el.classList.remove('on');el.style.borderColor='';el.style.background='';el.style.color=''}
+    else{wrongFilter.add(id);el.classList.add('on')}
+    if(wrongFilter.size===0)document.querySelector('#wrong-chips .chip').classList.add('on');
+  }
+  loadWrongBank();
+}
+function renderWrongList(allWrongs,sm){
+  let wrongs=allWrongs;
+  if(wrongFilter.size>0)wrongs=allWrongs.filter(i=>wrongFilter.has(i.sj));
+  const seen=new Set();
+  const unique=wrongs.filter(i=>{if(seen.has(i.question))return false;seen.add(i.question);return true;});
+  document.getElementById('wrong-count-info').textContent='총 '+unique.length+'개의 틀린 문제';
+  document.getElementById('btn-wrong-exam').disabled=!unique.length;
+  const el=document.getElementById('wrong-list-body');
+  if(!unique.length){el.innerHTML='<div class="empty"><div class="ei2">✅</div><div class="et2">선택한 과목에<br>틀린 문제가 없어요!</div></div>';return}
+  el.innerHTML=unique.map(function(r){
+    const s=sm[r.sj];const col=s?s.color:'#f87171';const sn=s?s.name:'과목';
+    const ca=r.choices&&r.choices.length?r.choices[(typeof r.answer==='number'?r.answer:parseInt(r.answer))-1]||r.answer:r.answer;
+    const uaRaw=r.ua!=null?r.ua:r.userAnswer;
+    const ua=r.choices&&r.choices.length&&typeof uaRaw==='number'?r.choices[uaRaw-1]||uaRaw:uaRaw;
+    return '<div class="wbank-item"><div class="wm"><span class="tag" style="background:'+col+'22;color:'+col+'">'+sn+'</span><span class="bdg">'+(r.unit||'')+'</span></div><div class="wbank-q">'+r.question+'</div><div class="wbank-ans"><span class="wmy">✗ 내 답: '+(ua!=null?ua:'(없음)')+'</span><span style="color:var(--dim)">│</span><span class="wok">✓ 정답: '+ca+'</span></div>'+(r.explanation?'<div class="wex" style="margin-top:8px">💡 해설<br>'+r.explanation+'</div>':'')+'</div>';
+  }).join('');
+}
+
+// ── INIT ──────────────────────────────────────────
+async function init(){
+  try{
+    await initDB();
+    const key=await gcfg('key');
+    if(key){A.key=key;go('sc-home');}
+  }catch(e){
+    console.error(e);toast('⚠️ 초기화 오류');
+  }
+}
+// listen for qcount change to update preview
+document.addEventListener('DOMContentLoaded',function(){
+  const qc=document.getElementById('qcount');
+  if(qc)qc.addEventListener('input',upPrev);
+});
+init();
+</script>
+</body>
+</html>
