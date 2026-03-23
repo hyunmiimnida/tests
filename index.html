@@ -7,54 +7,54 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="시험마스터">
-<meta name="theme-color" content="#0d1117">
+<meta name="theme-color" content="#f0f4f8">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{height:100%;background:#0d1117}
-body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;font-size:15px;line-height:1.5;overflow:hidden}
+html{height:100%;background:#f0f4f8}
+body{height:100%;background:#f0f4f8;color:#1a2332;font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;font-size:15px;line-height:1.5;overflow:hidden}
 #app{height:100vh;max-width:480px;margin:0 auto;position:relative;overflow:hidden}
 :root{
-  --bg:#0d1117;--bg2:#161b27;--bg3:#1e2535;--bg4:#252d40;
-  --text:#f0f6fc;--dim:#7d8fa8;
-  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
-  --blue:#4f8ef7;--blue-d:rgba(79,142,247,.15);
-  --green:#34d399;--green-d:rgba(52,211,153,.14);
-  --red:#f87171;--red-d:rgba(248,113,113,.14);
-  --amber:#fbbf24;--amber-d:rgba(251,191,36,.14);
-  --purple:#a78bfa;--purple-d:rgba(167,139,250,.14);
+  --bg:#f0f4f8;--bg2:#ffffff;--bg3:#e8edf2;--bg4:#dde3ea;
+  --text:#1a2332;--dim:#4b5563;
+  --border:rgba(0,0,0,.08);--border2:rgba(0,0,0,.14);
+  --blue:#2563eb;--blue-d:rgba(37,99,235,.12);
+  --green:#059669;--green-d:rgba(5,150,105,.12);
+  --red:#dc2626;--red-d:rgba(220,38,38,.1);
+  --amber:#d97706;--amber-d:rgba(217,119,6,.1);
+  --purple:#7c3aed;--purple-d:rgba(124,58,237,.1);
   --r:14px;--r2:10px;--r3:8px;
 }
-.sc{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:#0d1117;display:block;opacity:0;pointer-events:none;transition:opacity .2s}
+.sc{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:#f0f4f8;display:block;opacity:0;pointer-events:none;transition:opacity .2s}
 .sc.on{opacity:1;pointer-events:auto}
-.nb{position:sticky;top:0;z-index:50;background:rgba(13,17,23,.95);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:14px 16px}
+.nb{position:sticky;top:0;z-index:50;background:rgba(240,244,248,.96);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:14px 16px}
 .nb-t{font-size:16px;font-weight:700;flex:1}
 .bk{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;-webkit-appearance:none}
 .pc{padding:16px 16px 100px}
 .sec{margin-bottom:20px}
 .st2{font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.9px;margin-bottom:10px}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:15px;border-radius:var(--r2);border:none;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.2px;transition:opacity .15s,transform .15s;-webkit-appearance:none}
 .btn:active{transform:scale(.97);opacity:.85}
 .btn:disabled{opacity:.35;cursor:not-allowed;transform:none!important}
 .btp{background:var(--blue);color:#fff}
-.btg{background:var(--green);color:#0d1117}
+.btg{background:var(--green);color:#fff}
 .btgh{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
 .btd{background:var(--red-d);color:var(--red);border:1px solid rgba(248,113,113,.3)}
 .btsm{padding:10px 14px;font-size:13px;border-radius:var(--r3);width:auto}
 .bt2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.inp{width:100%;padding:13px 14px;background:var(--bg3);border:1.5px solid var(--border);border-radius:var(--r2);color:var(--text);font-family:inherit;font-size:15px;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.inp{width:100%;padding:13px 14px;background:#fff;border:1.5px solid var(--border2);border-radius:var(--r2);color:var(--text);font-family:inherit;font-size:15px;outline:none;transition:border-color .2s;-webkit-appearance:none}
 .inp:focus{border-color:var(--blue)}
 .lbl{display:block;font-size:12px;font-weight:700;color:var(--dim);margin-bottom:7px}
 .ig{margin-bottom:14px}
 .tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
-.bdg{padding:2px 8px;border-radius:12px;font-size:11px;font-weight:700;background:var(--bg4);color:var(--dim)}
+.bdg{padding:2px 8px;border-radius:12px;font-size:11px;font-weight:700;background:var(--bg3);color:var(--dim);border:1px solid var(--border2)}
 /* TABS */
-.tabs{display:flex;gap:6px;margin-bottom:14px;background:var(--bg3);padding:4px;border-radius:10px}
+.tabs{display:flex;gap:6px;margin-bottom:14px;background:var(--bg3);padding:4px;border-radius:10px;border:1px solid var(--border)}
 .tab{flex:1;padding:8px 4px;text-align:center;font-size:12px;font-weight:700;color:var(--dim);border-radius:7px;cursor:pointer;transition:all .15s}
-.tab.on{background:var(--bg);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.tab.on{background:var(--bg);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.12)}
 /* CHIPS */
 .chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
-.chip{padding:7px 13px;border-radius:20px;border:1.5px solid var(--border);background:var(--bg3);color:var(--dim);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
+.chip{padding:7px 13px;border-radius:20px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--dim);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
 .chip.on{border-color:var(--blue);background:var(--blue-d);color:var(--blue)}
 /* SETUP */
 .hero{padding:60px 24px 30px;text-align:center}
@@ -72,24 +72,24 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
 .ht b{color:var(--blue)}
 .ib{width:40px;height:40px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}
 .sts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}
-.sc2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 10px;text-align:center}
+.sc2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 10px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .sn2{font-size:26px;font-weight:900;color:var(--blue);letter-spacing:-1px}
 .sl2{font-size:11px;color:var(--dim);margin-top:2px}
 .ag{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.ac{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px 14px;cursor:pointer;display:flex;flex-direction:column;gap:9px;transition:background .15s}
-.ac:active{background:var(--bg3)}
+.ac{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px 14px;cursor:pointer;display:flex;flex-direction:column;gap:9px;transition:all .15s;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.ac:active{background:var(--bg3);box-shadow:none;transform:scale(.98)}
 .aci{font-size:28px}
 .act{font-size:13px;font-weight:700}
 .acs{font-size:11px;color:var(--dim)}
-.acf{grid-column:span 2;flex-direction:row;align-items:center;gap:14px;background:linear-gradient(135deg,#1a3360,#261662);border-color:rgba(79,142,247,.35)}
+.acf{grid-column:span 2;flex-direction:row;align-items:center;gap:14px;background:linear-gradient(135deg,#1d4ed8,#4338ca);border-color:rgba(79,142,247,.35)}
 .acf .aci{font-size:32px}
-.acf .act{font-size:15px}
-.acf .acs{font-size:12px}
+.acf .act{font-size:15px;color:#fff}
+.acf .acs{font-size:12px;color:rgba(255,255,255,.8)}
 .ac-amber{border-color:rgba(251,191,36,.3);background:var(--amber-d)}
 .ac-amber .act,.ac-amber .acs{color:inherit}
 .ac-red{border-color:rgba(248,113,113,.3);background:var(--red-d)}
-.hi2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:background .15s}
-.hi2:active{background:var(--bg3)}
+.hi2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .15s;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.hi2:active{background:var(--bg3);box-shadow:none}
 .hii{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .hin{flex:1;min-width:0}
 .hin-t{font-size:13px;font-weight:700;margin-bottom:2px}
@@ -102,7 +102,7 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
 .ei2{font-size:44px;margin-bottom:14px}
 .et2{font-size:13px;color:var(--dim);line-height:1.9}
 /* SUBJECTS */
-.sj{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:15px 14px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:background .15s}
+.sj{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:15px 14px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:all .15s;box-shadow:0 1px 3px rgba(0,0,0,.05)}
 .sj:active{background:var(--bg3)}
 .sjd{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .sji{flex:1}
@@ -111,7 +111,7 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
 .sjc{font-size:18px;font-weight:900}
 .cls2{display:flex;gap:9px;flex-wrap:wrap;margin-top:8px}
 .cd{width:38px;height:38px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s}
-.cd.on{border-color:#fff;transform:scale(1.1)}
+.cd.on{border-color:#1a2332;transform:scale(1.1)}
 /* IMPORT */
 .dz{border:2px dashed rgba(79,142,247,.5);border-radius:var(--r);padding:36px 16px;text-align:center;cursor:pointer;background:var(--blue-d);margin-bottom:14px;transition:background .2s}
 .dz.over{background:rgba(79,142,247,.28)}
@@ -120,40 +120,40 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
 .dzs{font-size:12px;color:var(--dim)}
 .fb2{background:var(--green-d);border:1px solid rgba(52,211,153,.3);border-radius:var(--r2);padding:12px 14px;display:none;margin-bottom:14px}
 .fbn{font-weight:700;color:var(--green);font-size:13px}
-.pbw{background:var(--bg3);border-radius:6px;height:8px;overflow:hidden;margin:10px 0}
+.pbw{background:var(--bg3);border:1px solid var(--border);border-radius:6px;height:8px;overflow:hidden;margin:10px 0}
 .pb2{height:100%;background:var(--blue);border-radius:6px;transition:width .5s ease;width:0}
 .pcn{font-size:24px;font-weight:900;color:var(--blue);text-align:center;margin:6px 0 2px}
 .pcs{font-size:12px;color:var(--dim);text-align:center}
-.log{background:#05070f;border:1px solid var(--border);border-radius:var(--r2);padding:10px;font-size:11px;color:var(--dim);max-height:150px;overflow-y:auto;font-family:monospace;margin-top:10px;line-height:1.8}
-.lk{color:var(--green)}.le{color:var(--red)}.li{color:var(--blue)}
+.log{background:#f8fafc;border:1px solid var(--border2);border-radius:var(--r2);padding:10px;font-size:11px;color:#374151;max-height:150px;overflow-y:auto;font-family:monospace;margin-top:10px;line-height:1.8}
+.lk{color:#065f46}.le{color:#991b1b}.li{color:#1e40af}
 /* EXAM SETUP */
 .esinfo{background:var(--amber-d);border:1px solid rgba(251,191,36,.3);border-radius:var(--r2);padding:13px 14px;margin-bottom:16px;font-size:13px;line-height:1.8}
-.st3{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .15s}
+.st3{background:var(--bg2);border:1.5px solid var(--border2);box-shadow:0 1px 3px rgba(0,0,0,.05);border-radius:var(--r2);padding:14px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .15s}
 .st3.on{border-color:var(--blue);background:var(--blue-d)}
 .std{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .sti{flex:1}
 .stn{font-size:14px;font-weight:700}
 .sts3{font-size:12px;color:var(--dim)}
-.chk{width:22px;height:22px;border-radius:6px;border:2px solid var(--border2);background:var(--bg3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
+.chk{width:22px;height:22px;border-radius:6px;border:2px solid var(--border2);background:var(--bg2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
 .st3.on .chk{background:var(--blue);border-color:var(--blue);color:#fff}
 /* EXAM */
-.eh{position:sticky;top:0;z-index:20;background:rgba(13,17,23,.96);padding:12px 16px;border-bottom:1px solid var(--border)}
+.eh{position:sticky;top:0;z-index:20;background:rgba(240,244,248,.97);padding:12px 16px;border-bottom:1px solid var(--border)}
 .et{display:flex;align-items:center;gap:9px;margin-bottom:9px}
 .etg{font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-d);padding:4px 10px;border-radius:12px}
 .timer{font-size:12px;font-weight:700;color:var(--amber);font-family:monospace;letter-spacing:.5px;background:var(--amber-d);padding:3px 9px;border-radius:10px}
 .en{font-size:12px;color:var(--dim);margin-left:auto}
-.epw{background:var(--bg3);border-radius:4px;height:4px;overflow:hidden}
+.epw{background:var(--bg3);border:1px solid var(--border);border-radius:4px;height:4px;overflow:hidden}
 .ep{height:100%;background:var(--blue);border-radius:4px;transition:width .4s ease}
 .pips{display:flex;gap:4px;margin-top:8px}
 .pip{height:4px;border-radius:2px;flex:1;opacity:.25;transition:opacity .3s}
 .pip.done{opacity:1}
 .pip.now{opacity:1;animation:pp 1.5s infinite}
 @keyframes pp{0%,100%{opacity:1}50%{opacity:.45}}
-.qcard{margin:16px 16px 0;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 16px}
+.qcard{margin:16px 16px 0;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;box-shadow:0 2px 8px rgba(0,0,0,.07)}
 .qm{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}
 .qt{font-size:15px;font-weight:500;line-height:1.9}
 .cl2{padding:12px 16px 130px;display:flex;flex-direction:column;gap:9px}
-.cb2{width:100%;text-align:left;padding:14px;background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r2);color:var(--text);font-family:inherit;font-size:13.5px;line-height:1.6;cursor:pointer;display:flex;align-items:flex-start;gap:11px;transition:border-color .15s,background .15s;-webkit-appearance:none}
+.cb2{width:100%;text-align:left;padding:14px;background:var(--bg2);border:1.5px solid var(--border2);border-radius:var(--r2);color:var(--text);font-family:inherit;font-size:13.5px;line-height:1.6;cursor:pointer;display:flex;align-items:flex-start;gap:11px;transition:border-color .15s,background .15s;-webkit-appearance:none}
 .cb2:active:not(:disabled){transform:scale(.985)}
 .cb2.sel{border-color:var(--blue);background:var(--blue-d)}
 .cb2.cor{border-color:var(--green);background:var(--green-d)}
@@ -162,50 +162,57 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
 .cb2.sel .cn2{color:var(--blue)}
 .cb2.cor .cn2{color:var(--green)}
 .cb2.wrg .cn2{color:var(--red)}
-.qbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:14px 16px 20px;background:var(--bg);border-top:1px solid var(--border);z-index:30}
-.exp{margin:0 16px 12px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);border-radius:var(--r2);padding:14px;display:none}
-.exp-t{font-size:11px;font-weight:700;color:#67e8f9;letter-spacing:.8px;margin-bottom:6px}
-.exp-b{font-size:13px;line-height:1.85;color:#e0f2fe}
+.qbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:14px 16px 20px;background:var(--bg);box-shadow:0 -2px 16px rgba(0,0,0,.08);border-top:1px solid var(--border);z-index:30}
+.exp{margin:0 16px 12px;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:var(--r2);padding:14px;display:none}
+.exp-t{font-size:11px;font-weight:700;color:#1d4ed8;letter-spacing:.8px;margin-bottom:6px}
+.exp-b{font-size:13px;line-height:1.85;color:#1e3a5f}
 .trans{margin:16px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:30px 20px;text-align:center;display:none}
 .tri{font-size:46px;margin-bottom:12px}
 .trt{font-size:19px;font-weight:800;margin-bottom:5px}
 .trs{font-size:13px;color:var(--dim)}
 /* RESULTS */
 .rh{padding:36px 16px 20px;text-align:center}
-.ring{width:130px;height:130px;border-radius:50%;margin:0 auto 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:5px solid var(--blue);background:var(--blue-d)}
+.ring{width:130px;height:130px;border-radius:50%;margin:0 auto 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:5px solid var(--blue);background:var(--blue-d);box-shadow:0 4px 20px rgba(37,99,235,.2)}
 .rbig{font-size:38px;font-weight:900;color:var(--blue);line-height:1;letter-spacing:-2px}
 .rtot{font-size:13px;color:var(--dim)}
 .rmsg{font-size:20px;font-weight:800;margin-bottom:5px}
 .rpct{font-size:14px;color:var(--dim)}
-.src2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px}
+.src2{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
 .srch{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .srcd{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .srcn{font-size:14px;font-weight:700;flex:1}
 .srcs{font-size:18px;font-weight:900}
-.mbar{background:var(--bg3);border-radius:4px;height:5px;overflow:hidden}
+.mbar{background:var(--bg3);border:1px solid var(--border);border-radius:4px;height:6px;overflow:hidden}
 .mbarf{height:100%;border-radius:4px;transition:width .8s ease}
-.wi{background:var(--bg3);border-radius:var(--r2);padding:14px;margin-bottom:10px;border-left:3px solid var(--red)}
+.wi{background:#fff7f7;border:1px solid rgba(220,38,38,.15);border-left:3px solid var(--red);border-radius:var(--r2);padding:14px;margin-bottom:10px}
 .wm{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
 .wq{font-size:13.5px;line-height:1.75;margin-bottom:9px}
 .wa2{display:flex;gap:12px;font-size:12px;flex-wrap:wrap;margin-bottom:6px}
 .wmy{color:var(--red)}.wok{color:var(--green)}
-.wex{background:rgba(6,182,212,.09);border:1px solid rgba(6,182,212,.18);border-radius:var(--r3);padding:10px;font-size:12px;line-height:1.8;color:#a5f3fc;margin-top:8px}
+.wex{background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.18);border-radius:var(--r3);padding:10px;font-size:12px;line-height:1.8;color:#1e3a5f;margin-top:8px}
 /* WRONG BANK */
-.wbank-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px}
+.wbank-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
 .wbank-q{font-size:13.5px;line-height:1.7;margin-bottom:8px}
 .wbank-ans{display:flex;gap:10px;font-size:12px;flex-wrap:wrap}
-.wbank-bot{position:sticky;bottom:0;padding:13px 16px 20px;background:var(--bg);border-top:1px solid var(--border)}
+.wbank-bot{position:sticky;bottom:0;padding:13px 16px 20px;background:var(--bg);border-top:1px solid var(--border);box-shadow:0 -2px 12px rgba(0,0,0,.06)}
 /* TOAST */
-#toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--bg3);border:1px solid var(--border2);border-radius:24px;padding:12px 20px;font-size:13px;font-weight:600;box-shadow:0 4px 24px rgba(0,0,0,.7);opacity:0;transition:all .24s;z-index:9999;white-space:nowrap;max-width:90%;text-align:center;pointer-events:none}
+#toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(10px);background:#1a2332;color:#f0f4f8;border:1px solid rgba(0,0,0,.15);border-radius:24px;padding:12px 20px;font-size:13px;font-weight:600;box-shadow:0 4px 24px rgba(0,0,0,.2);opacity:0;transition:all .24s;z-index:9999;white-space:nowrap;max-width:90%;text-align:center;pointer-events:none}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 /* MODAL */
-.mov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;display:none;align-items:flex-end}
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;display:none;align-items:flex-end}
 .mov.open{display:flex}
 .modal{background:var(--bg2);border-radius:22px 22px 0 0;width:100%;max-width:480px;margin:0 auto;padding:24px 18px 40px;animation:sup .25s ease}
 @keyframes sup{from{transform:translateY(40px)}to{transform:translateY(0)}}
 .mot{font-size:17px;font-weight:800;margin-bottom:16px}
 /* TIMER BADGE in results */
 .time-badge{display:inline-flex;align-items:center;gap:5px;background:var(--amber-d);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--amber);margin-top:8px}
+
+/* SELECT MODE */
+.hi2-sel{background:rgba(37,99,235,.08);border-color:var(--blue)!important}
+.sel-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border2);background:var(--bg2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s}
+.hi2-sel .sel-check{background:var(--blue);border-color:var(--blue);color:#fff}
+.sel-bar{position:sticky;bottom:0;padding:12px 16px 20px;background:var(--bg);border-top:1px solid var(--border);box-shadow:0 -2px 12px rgba(0,0,0,.06);display:none;gap:9px}
+.sel-bar.on{display:flex}
 </style>
 </head>
 <body>
@@ -216,14 +223,9 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
   <div class="hero">
     <div class="logo">📚</div>
     <div class="hero-t">시험<b>마스터</b></div>
-    <p class="hero-s">PDF 교재를 AI로 자동 분석해<br>과목별 체계적 시험 관리</p>
+    <p class="hero-s">AI로 추출한 문제 파일을 불러와<br>과목별 체계적 시험 관리</p>
   </div>
   <div class="fw">
-    <div class="ig">
-      <label class="lbl">Claude API 키 (Anthropic)</label>
-      <input type="password" id="inp-key" class="inp" placeholder="sk-ant-...">
-      <p class="an">▶ <a href="https://console.anthropic.com/settings/keys" target="_blank">Anthropic Console에서 발급 (신규 $5 크레딧)</a></p>
-    </div>
     <button class="btn btp" onclick="doSetup()">시작하기 →</button>
   </div>
 </div>
@@ -235,7 +237,6 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
       <div class="hg">📖 오늘도 열공!</div>
       <div class="ht">시험<b>마스터</b></div>
     </div>
-    <div class="ib" onclick="showSettings()">⚙️</div>
   </div>
   <div class="pc" style="padding-top:10px">
     <div class="sts">
@@ -295,8 +296,8 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
   <div class="pc">
     <div class="card" id="sd-card"></div>
     <div class="sec">
-      <div class="st2">PDF 문제 추출</div>
-      <button class="btn btp" onclick="goImport()">📄 &nbsp;PDF 업로드 및 추출</button>
+      <div class="st2">문제 파일 가져오기</div>
+      <button class="btn btp" onclick="goImport()">📂 &nbsp;JSON 문제 파일 불러오기</button>
     </div>
     <div class="sec" style="margin-top:12px">
       <button class="btn btd" onclick="delSubject()">🗑️ &nbsp;이 과목 삭제</button>
@@ -308,36 +309,35 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
 <div id="sc-import" class="sc">
   <div class="nb">
     <button class="bk" onclick="go('sc-sj-detail')">←</button>
-    <span class="nb-t">PDF 문제 추출</span>
+    <span class="nb-t">문제 파일 가져오기</span>
   </div>
   <div class="pc">
     <div class="card" style="background:var(--blue-d);border-color:rgba(79,142,247,.25);margin-bottom:14px;font-size:12px;color:#93c5fd;line-height:1.9">
-      💡 AI가 배치별로 자동 처리합니다.<br>한번 추출하면 <b>DB에 영구 저장</b> — 재추출 불필요!
+      💡 AI(ChatGPT·Claude·Gemini)로 추출한 <b>JSON 파일</b>을 불러오세요.<br>한번 저장하면 <b>DB에 영구 저장</b> — 재업로드 불필요!
     </div>
     <div class="dz" id="dz" onclick="document.getElementById('fi').click()">
-      <input type="file" id="fi" accept=".pdf" style="display:none" onchange="onFile(event)">
-      <div class="dzi">📄</div>
-      <div class="dzt">PDF 파일 선택</div>
-      <div class="dzs">탭하여 파일 선택</div>
+      <input type="file" id="fi" accept=".json,application/json" style="display:none" onchange="onFile(event)">
+      <div class="dzi">📂</div>
+      <div class="dzt">JSON 문제 파일 선택</div>
+      <div class="dzs">탭하여 파일 선택 (.json)</div>
     </div>
     <div class="fb2" id="fb2">📎 <span class="fbn" id="fbn"></span> <span style="color:var(--dim);font-size:12px" id="fbsz"></span></div>
-    <div class="card">
-      <div class="st2" style="margin-bottom:10px">설정</div>
-      <div class="ig">
-        <label class="lbl">답지 시작 페이지 (0 = 자동 감지)</label>
-        <input type="number" id="akp" class="inp" value="0" min="0">
-      </div>
-      <div class="ig" style="margin-bottom:0">
-        <label class="lbl">배치당 페이지 수 (기본 12)</label>
-        <input type="number" id="bszinp" class="inp" value="12" min="5" max="25">
-      </div>
+    <div class="card" style="font-size:12px;color:var(--dim);line-height:1.9">
+      <div class="st2" style="margin-bottom:8px">JSON 형식 예시</div>
+      <div style="background:#f8fafc;border-radius:8px;padding:10px;font-family:monospace;font-size:11px;color:#1e40af;overflow-x:auto;white-space:pre">[
+  {
+    "unit": "1단원",
+    "question": "문제 내용",
+    "choices": ["보기1","보기2","보기3","보기4"],
+    "answer": 1,
+    "explanation": "해설 내용"
+  }
+]</div>
     </div>
-    <button class="btn btp" id="btn-ext" onclick="startExtract()" disabled>🚀 &nbsp;문제 추출 시작</button>
+    <button class="btn btp" id="btn-ext" onclick="startImportJson()" disabled>📥 &nbsp;문제 저장하기</button>
     <div class="card" id="prog-card" style="display:none;margin-top:14px">
-      <div class="st2" style="margin-bottom:8px">진행 상황</div>
-      <div class="pcn" id="pcn">0개 추출됨</div>
-      <div class="pbw"><div class="pb2" id="pb2"></div></div>
-      <div class="pcs" id="pcs">준비 중...</div>
+      <div class="st2" style="margin-bottom:8px">결과</div>
+      <div class="pcn" id="pcn">0개 저장됨</div>
       <div class="log" id="logbox"></div>
     </div>
   </div>
@@ -441,6 +441,7 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
   <div class="nb">
     <button class="bk" onclick="go('sc-home')">←</button>
     <span class="nb-t">시험 기록</span>
+    <button class="btn btgh btsm" onclick="toggleSelMode()" id="btn-sel-mode" style="width:auto;padding:8px 12px;font-size:12px">선택</button>
   </div>
   <div class="pc">
     <div class="tabs">
@@ -449,6 +450,10 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
       <div class="tab" onclick="setHistTab('quick',this)">빠른시험</div>
     </div>
     <div id="hist-list"></div>
+  </div>
+  <div class="sel-bar" id="sel-bar">
+    <button class="btn btgh" style="flex:1" onclick="selAll()">전체 선택</button>
+    <button class="btn btd" style="flex:1" id="btn-del-sel" onclick="delSelected()" disabled>🗑️ 삭제 (<span id="sel-count">0</span>)</button>
   </div>
 </div>
 
@@ -503,11 +508,11 @@ body{height:100%;background:#0d1117;color:#f0f6fc;font-family:-apple-system,Blin
 
 <script>
 const COLORS=['#4f8ef7','#34d399','#fbbf24','#f87171','#a78bfa','#22d3ee','#fb923c'];
-const NUMS=['①','②','③','④','⑤'];
+const NUMS=['①','②','③','④'];
 const QUICK_N=5;
 
 const A={
-  key:'',color:COLORS[0],curSJ:null,impSJ:null,pdf:null,
+  key:'',color:COLORS[0],curSJ:null,impSJ:null,jsonFile:null,
   sessions:[],flat:[],idx:0,answered:false,sel:null,
   results:[],examName:'',examType:'regular',
   examStart:0,examDuration:0,timerInt:null,
@@ -517,6 +522,8 @@ let eSubjs=new Set();
 let qSubjs=new Set(); // for quick exam
 let histTab='all';
 let wrongFilter=new Set(); // subject ids, empty = all
+let selMode=false;
+let selIds=new Set();
 
 let DB;
 function initDB(){
@@ -607,13 +614,7 @@ function stopTimer(){
 
 // ── SETUP ────────────────────────────────────────
 async function doSetup(){
-  const k=document.getElementById('inp-key').value.trim();
-  if(!k||!k.startsWith('sk-ant-')){toast('⚠️ Claude API 키는 sk-ant- 로 시작해야 합니다');return}
-  A.key=k;await scfg('key',k);toast('✅ 저장됨');go('sc-home');
-}
-function showSettings(){
-  const k=prompt('Claude API 키 재입력:',A.key)||'';
-  if(k.startsWith('sk-ant-')){A.key=k;scfg('key',k);toast('✅ 업데이트됨')}else{toast('⚠️ Claude API 키는 sk-ant- 로 시작해야 합니다')}
+  go('sc-home');
 }
 
 // ── HOME ─────────────────────────────────────────
@@ -631,7 +632,7 @@ async function loadHome(){
     const sn=(e.sjs||[]).map(id=>sm[id]?sm[id].name:'?').join(', ');
     const col=(e.sjs||[]).map(id=>sm[id]?sm[id].color:'#4f8ef7')[0]||'#4f8ef7';
     const dur=e.duration?'⏱'+fmtTime(e.duration):'';
-    return '<div class="hi2" onclick="viewExam('+e.id+')"><div class="hii" style="background:'+col+'22">📝</div><div class="hin"><div class="hin-t">'+e.name+'</div><div class="hin-s">'+sn+'</div><div style="font-size:11px;color:#4a5568;margin-top:2px">'+fdate(e.date)+(dur?' · '+dur:'')+'</div></div><div class="his"><div class="his-p" style="color:'+pc(p)+'">'+p+'%</div><div class="his-f">'+e.score+'/'+e.total+'</div></div></div>';
+    return '<div class="hi2" onclick="viewExam('+e.id+')"><div class="hii" style="background:'+col+'22">📝</div><div class="hin"><div class="hin-t">'+e.name+'</div><div class="hin-s">'+sn+'</div><div style="font-size:11px;color:#6b7280;margin-top:2px">'+fdate(e.date)+(dur?' · '+dur:'')+'</div></div><div class="his"><div class="his-p" style="color:'+pc(p)+'">'+p+'%</div><div class="his-f">'+e.score+'/'+e.total+'</div></div></div>';
   }).join('');
 }
 async function goExamSetup(){
@@ -685,7 +686,7 @@ function goImport(){A.impSJ=A.curSJ;go('sc-import');resetImport()}
 
 // ── IMPORT ───────────────────────────────────────
 function resetImport(){
-  A.pdf=null;document.getElementById('fi').value='';
+  A.jsonFile=null;document.getElementById('fi').value='';
   document.getElementById('fb2').style.display='none';
   document.getElementById('btn-ext').disabled=true;
   document.getElementById('prog-card').style.display='none';
@@ -701,93 +702,34 @@ function onFile(e){
   document.getElementById('fbsz').textContent='('+(f.size/1048576).toFixed(1)+' MB)';
   document.getElementById('btn-ext').disabled=false;
 }
-async function loadPdfJs(){
-  if(window['pdfjs-dist/build/pdf'])return window['pdfjs-dist/build/pdf'];
-  return new Promise((ok,fail)=>{
-    const s=document.createElement('script');
-    s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-    s.onload=()=>ok(window['pdfjs-dist/build/pdf']);
-    s.onerror=()=>fail(new Error('PDF.js 로드 실패'));
-    document.head.appendChild(s);
-  });
-}
-async function getPages(file){
-  const lib=await loadPdfJs();
-  lib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-  const buf=await file.arrayBuffer();
-  const pdf=await lib.getDocument({data:buf}).promise;
-  const n=pdf.numPages;
-  addLog('PDF 로드: '+n+'페이지','li');
-  const pages=[];
-  for(let i=1;i<=n;i++){
-    const p=await pdf.getPage(i);
-    const c=await p.getTextContent();
-    pages.push({pg:i,text:c.items.map(x=>x.str).join(' ')});
-    if(i%25===0||i===n)document.getElementById('pcs').textContent='텍스트 추출: '+i+'/'+n;
-  }
-  return pages;
-}
-function autoAK(pages){
-  const kw=['정답','해설','Answer','정답 및 해설'];
-  const half=Math.floor(pages.length*.55);
-  for(let i=half;i<pages.length;i++)
-    if(kw.some(k=>pages[i].text.includes(k))&&pages[i].text.length<800)return pages[i].pg;
-  return Math.floor(pages.length*.75)+1;
-}
-async function startExtract(){
-  if(!A.pdf||!A.key)return;
+async function startImportJson(){
+  if(!A.jsonFile)return;
   const sj=await dg('subj',A.impSJ);
   document.getElementById('prog-card').style.display='block';
   document.getElementById('logbox').innerHTML='';
   document.getElementById('btn-ext').disabled=true;
-  let akp=parseInt(document.getElementById('akp').value)||0;
-  const bsz=parseInt(document.getElementById('bszinp').value)||12;
-  let total=0;
   try{
-    const pages=await getPages(A.pdf);
-    if(!akp){akp=autoAK(pages);addLog('답지 자동 감지: '+akp+'p','li')}
-    else addLog('답지 시작: '+akp+'p','li');
-    const qp=pages.filter(p=>p.pg<akp);
-    const akt=pages.filter(p=>p.pg>=akp).map(p=>'['+p.pg+'p]\n'+p.text).join('\n').substring(0,9000);
-    addLog('문제 '+qp.length+'p / 답지 '+(pages.length-qp.length)+'p','li');
-    const batches=[];
-    for(let i=0;i<qp.length;i+=bsz)batches.push(qp.slice(i,i+bsz));
-    addLog(batches.length+'배치 처리 시작','li');
-    for(let bi=0;bi<batches.length;bi++){
-      const bt=batches[bi];
-      const sp=bt[0].pg,ep=bt[bt.length-1].pg;
-      addLog('배치 '+(bi+1)+'/'+batches.length+' ('+sp+'~'+ep+'p)...');
-      document.getElementById('pb2').style.width=Math.round(bi/batches.length*100)+'%';
-      document.getElementById('pcs').textContent='배치 '+(bi+1)+'/'+batches.length;
-      let ok=false,tr=0;
-      while(!ok&&tr<3){
-        try{
-          const qs=await callAI(bt.map(p=>'['+p.pg+'p]\n'+p.text).join('\n'),akt,sj.name);
-          const save=qs.map(q=>Object.assign({},q,{sj:A.impSJ}));
-          if(save.length){await daddm('q',save);total+=save.length;document.getElementById('pcn').textContent=total+'개 추출됨';}
-          addLog('배치 '+(bi+1)+' 완료: '+save.length+'개','lk');ok=true;
-        }catch(e){tr++;addLog('오류('+tr+'/3): '+e.message,'le');if(tr<3)await sl(2500);}
-      }
-      await sl(600);
-    }
-    document.getElementById('pb2').style.width='100%';
-    document.getElementById('pcs').textContent='✅ 완료!';
-    addLog('🎉 총 '+total+'개 추출 완료!','lk');
-    toast('✅ '+total+'개 문제 저장됨');
+    const text=await A.jsonFile.text();
+    let arr;
+    try{arr=JSON.parse(text);}catch(e){throw new Error('JSON 파싱 실패: '+e.message);}
+    if(!Array.isArray(arr))throw new Error('JSON 최상위가 배열이어야 합니다.');
+    const valid=arr.filter(q=>q&&q.question&&q.question.length>2).map(q=>({
+      unit:(q.unit||q.chapter||'기타').trim(),
+      type:(q.type||'연습문제').trim(),
+      question:(q.question||'').trim(),
+      choices:Array.isArray(q.choices)?q.choices.slice(0,4):[],
+      answer:q.answer!=null?q.answer:null,
+      explanation:(q.explanation||'').trim(),
+      sj:A.impSJ
+    }));
+    if(!valid.length)throw new Error('유효한 문제가 없습니다.');
+    await daddm('q',valid);
+    document.getElementById('pcn').textContent=valid.length+'개 저장됨';
+    addLog('✅ '+valid.length+'개 문제 저장 완료!','lk');
+    toast('✅ '+valid.length+'개 문제 저장됨');
     setTimeout(()=>openDetail(A.impSJ),1500);
-  }catch(e){addLog('오류: '+e.message,'le');toast('❌ 추출 오류');console.error(e);}
+  }catch(e){addLog('❌ 오류: '+e.message,'le');toast('❌ 오류: '+e.message);console.error(e);}
   finally{document.getElementById('btn-ext').disabled=false;}
-}
-async function callAI(btext,aktext,sname){
-  const prompt='한국 교재에서 시험 문제를 추출하는 전문가입니다.\n과목: '+sname+'\n\n=== 문제 텍스트 ===\n'+btext.substring(0,11000)+'\n\n=== 정답/해설 텍스트 ===\n'+aktext+'\n\n모든 시험 문제를 추출하고 정답/해설을 연결하세요.\n순수 JSON 배열만 반환(코드블록 없이):\n[{"unit":"단원명","type":"연습문제","question":"문제내용","choices":["① ...","② ...","③ ...","④ ...","⑤ ..."],"answer":1,"explanation":"해설"}]\nanswer는 1~5 정수(주관식은 정답텍스트), choices 없으면 [], 문제없으면 []';
-  const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':A.key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:8192,messages:[{role:'user',content:prompt}]})});
-  if(!res.ok){const e=await res.json();throw new Error(e.error?e.error.message:'HTTP '+res.status)}
-  const d=await res.json();
-  const raw=((d.content||[])[0]||{text:''}).text.trim();
-  const clean=raw.replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/```\s*$/,'').trim();
-  let arr;
-  try{arr=JSON.parse(clean)}catch(_){const m=clean.match(/\[[\s\S]*\]/);arr=m?JSON.parse(m[0]):[]}
-  return(arr||[]).filter(q=>q&&q.question&&q.question.length>4).map(q=>({unit:(q.unit||'기타').trim(),type:(q.type||'연습문제').trim(),question:(q.question||'').trim(),choices:Array.isArray(q.choices)?q.choices:[],answer:q.answer!=null?q.answer:null,explanation:(q.explanation||'').trim()}));
 }
 
 // ── EXAM SETUP (Regular) ──────────────────────────
@@ -985,7 +927,11 @@ async function loadHistory(){
     const sn=(e.sjs||[]).map(id=>sm[id]?sm[id].name:'?').join(', ');
     const col=(e.sjs||[]).map(id=>sm[id]?sm[id].color:'#4f8ef7')[0]||'#4f8ef7';
     const dur=e.duration?'⏱ '+fmtTime(e.duration):'';
-    return '<div class="hi2" onclick="viewExam('+e.id+')"><div class="hii" style="background:'+col+'22">'+typeIcon(e.examType)+'</div><div class="hin"><div class="hin-t">'+e.name+'</div><div class="hin-s">'+sn+'</div><div style="font-size:11px;color:#4a5568;margin-top:2px">'+fdate(e.date)+(dur?' · '+dur:'')+'</div></div><div class="his"><div class="his-p" style="color:'+pc(p)+'">'+p+'%</div><div class="his-f">'+e.score+'/'+e.total+'</div></div></div>';
+    const checked=selIds.has(e.id);
+    const selCls=checked?' hi2-sel':'';
+    const chk=selMode?'<div class="sel-check">'+(checked?'✓':'')+'</div>':'';
+    const clickFn=selMode?'toggleSelItem('+e.id+',this)':'viewExam('+e.id+')';
+    return '<div class="hi2'+selCls+'" onclick="'+clickFn+'">'+chk+'<div class="hii" style="background:'+col+'22">'+typeIcon(e.examType)+'</div><div class="hin"><div class="hin-t">'+e.name+'</div><div class="hin-s">'+sn+'</div><div style="font-size:11px;color:#6b7280;margin-top:2px">'+fdate(e.date)+(dur?' · '+dur:'')+'</div></div><div class="his"><div class="his-p" style="color:'+pc(p)+'">'+p+'%</div><div class="his-f">'+e.score+'/'+e.total+'</div></div></div>';
   }).join('');
 }
 function typeIcon(t){return t==='quick'?'⚡':t==='wrongReview'?'❌':'📝'}
@@ -1011,6 +957,59 @@ async function viewExam(id){
   const dur=ex.duration?'<div class="time-badge">⏱ 소요시간: '+fmtTime(ex.duration)+'</div>':'';
   document.getElementById('hd-body').innerHTML='<div class="card" style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="font-size:42px;font-weight:900;color:'+pc(p)+';letter-spacing:-2px">'+ex.score+'</div><div style="font-size:22px;color:var(--dim)">/</div><div style="font-size:22px;font-weight:700;color:var(--dim)">'+ex.total+'</div><div style="flex:1;padding-left:8px"><div style="font-size:12px;color:var(--dim);margin-bottom:2px">'+fdate(ex.date)+'</div><div style="font-size:26px;font-weight:900;color:'+pc(p)+'">'+p+'%</div>'+dur+'</div></div>'+etypeBadge(ex.examType)+'<div class="sec" style="margin-top:14px"><div class="st2">과목별 결과</div>'+breakdown+'</div><div class="sec"><div class="st2">틀린 문제·해설 ('+wrongs.length+'개)</div>'+(wrongs.length?wrongs.map(r=>wiHtml(Object.assign({},r,{_sn:r.sn,_sc:r.sc,ua:r.ua}),sm)).join(''):'<p style="text-align:center;color:var(--green);padding:20px 0">🎉 모두 정답!</p>')+'</div><button class="btn btd" onclick="delExam('+id+')" style="margin-top:8px">🗑️ 이 기록 삭제</button>';
   go('sc-hist-detail');
+}
+function toggleSelMode(){
+  selMode=!selMode;
+  selIds.clear();
+  const btn=document.getElementById('btn-sel-mode');
+  const bar=document.getElementById('sel-bar');
+  btn.textContent=selMode?'취소':'선택';
+  btn.className=selMode?'btn btd btsm':'btn btgh btsm';
+  btn.style.cssText='width:auto;padding:8px 12px;font-size:12px';
+  bar.classList.toggle('on',selMode);
+  updateSelBar();
+  loadHistory();
+}
+function toggleSelItem(id,el){
+  if(selIds.has(id)){selIds.delete(id);el.classList.remove('hi2-sel');el.querySelector('.sel-check').textContent=''}
+  else{selIds.add(id);el.classList.add('hi2-sel');el.querySelector('.sel-check').textContent='✓'}
+  updateSelBar();
+}
+function selAll(){
+  const items=document.querySelectorAll('#hist-list .hi2');
+  const allSel=items.length>0&&[...items].every(el=>el.classList.contains('hi2-sel'));
+  items.forEach(function(el){
+    const fn=el.getAttribute('onclick');
+    const m=fn&&fn.match(/toggleSelItem\((\d+)/);
+    if(!m)return;
+    const id=parseInt(m[1]);
+    if(allSel){selIds.delete(id);el.classList.remove('hi2-sel');el.querySelector('.sel-check').textContent=''}
+    else{selIds.add(id);el.classList.add('hi2-sel');el.querySelector('.sel-check').textContent='✓'}
+  });
+  updateSelBar();
+}
+function updateSelBar(){
+  const n=selIds.size;
+  document.getElementById('sel-count').textContent=n;
+  document.getElementById('btn-del-sel').disabled=n===0;
+  const allBtn=document.querySelector('#sel-bar .btn.btgh');
+  if(allBtn){
+    const total=document.querySelectorAll('#hist-list .hi2').length;
+    allBtn.textContent=n===total&&total>0?'전체 해제':'전체 선택';
+  }
+}
+async function delSelected(){
+  if(!selIds.size)return;
+  if(!confirm(selIds.size+'개의 기록을 삭제할까요?'))return;
+  for(const id of selIds){await dd2('ex',id);await ddx('ei','eid',id);}
+  toast('🗑️ '+selIds.size+'개 삭제됨');
+  selIds.clear();
+  selMode=false;
+  document.getElementById('btn-sel-mode').textContent='선택';
+  document.getElementById('btn-sel-mode').className='btn btgh btsm';
+  document.getElementById('btn-sel-mode').style.cssText='width:auto;padding:8px 12px;font-size:12px';
+  document.getElementById('sel-bar').classList.remove('on');
+  loadHistory();
 }
 async function delExam(id){
   if(!confirm('이 시험 기록을 삭제할까요?'))return;
@@ -1061,8 +1060,7 @@ function renderWrongList(allWrongs,sm){
 async function init(){
   try{
     await initDB();
-    const key=await gcfg('key');
-    if(key){A.key=key;go('sc-home');}
+    go('sc-home');
   }catch(e){
     console.error(e);toast('⚠️ 초기화 오류');
   }
