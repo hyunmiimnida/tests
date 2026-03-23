@@ -2,7 +2,7 @@
   "name": "시험마스터",
   "short_name": "시험마스터",
   "description": "PDF 교재 기반 과목별 시험 관리 앱",
-  "start_url": "/quizmaster/",
+  "start_url": "/tests/",
   "display": "standalone",
   "background_color": "#0d1117",
   "theme_color": "#0d1117",
